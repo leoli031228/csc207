@@ -53,7 +53,8 @@ https://developer.squareup.com/reference/square
 **a screenshot of using a tool to try out the API**
 (like https://www.postman.com/Links or https://hoppscotch.io/Links)
 
-(TODO)
+![img.png](img.png)
+![img_1.png](img_1.png)
 
 **example output of running your Java code.**
 
