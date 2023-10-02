@@ -56,12 +56,16 @@ https://developer.squareup.com/reference/square
 ![img.png](img.png)
 ![img_1.png](img_1.png)
 
+**code snippet for the API call**
+
+![minimal_call_code.png](minimal_call_code.png)
+
 **example output of running your Java code.**
 
 (TODO)
 
 **a list of any technical problems blocking progress**
 
-(TODO)
+- no technical problems at the moment
 
 ***
