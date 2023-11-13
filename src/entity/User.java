@@ -1,6 +1,7 @@
 package entity;
 
-import java.awt.*;
+
+import java.util.List;
 
 public class User {
     private long userId;
