@@ -10,4 +10,7 @@ public class User {
     private String password;
 
     private List<Media> watchlist;
+    private List<Media> inProgress;
+    private List<Media> watchHistory;
+
 }
