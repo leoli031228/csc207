@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'abstract class AbstractList
+'abstract AbstractCollection
+'interface List
+'interface Collection
+'
+'List <|-- AbstractList
+'Collection <|-- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+'
+'class ArrayList {
+'Object[] elementData
+'size()
+'}
+'
+'enum TimeUnit {
+'DAYS
+'HOURS
+'MINUTES
+'}
+
+class User {
+    - long userId;
+    - String username;
+    - String email;
+    - String password;
+    - List<Media> watchlist;
+
+    void changeUsername()
+    void changeEmail()
+    void changePassword(String old, String new, String confirmNew)
+}
+
+class Watchlist{
+
+}
+
+abstract class Media {
+    String getID();
+    String getTitle();
+    String getGenre();
+    LocalDateTime getReleaseDate();
+}
+
+class Anime extends Media{
+    private long animeId;
+    private String title;
+    private String genre;
+    private Date releaseDate;
+    private String coverImage;
+    private String synopsis;
+    private List<Episode> episodes;
+
+    public String getID()
+    public String getTitle()
+    public String getGenre()
+    public LocalDateTime getReleaseDate()
+}
+
+class Manga extends Media{
+}
+
+class Episode{
+}
+
+class Chapter{
+
+}
+
+
+@enduml

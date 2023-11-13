@@ -1,6 +1,7 @@
 package entity;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 public class User {
     private long userId;
@@ -8,8 +9,5 @@ public class User {
     private String email;
     private String password;
 
-    private ArrayList<Media> watchList;
-    private ArrayList<Media> watchHistory;
-    private ArrayList<Media> favourites;
-    private ArrayList<Media> inProgress;
+    private List<Media> watchlist;
 }
