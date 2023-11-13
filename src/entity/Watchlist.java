@@ -1,5 +1,7 @@
 package entity;
 
-public class Watchlist {
+import java.util.List;
 
+public class Watchlist {
+    private List<Media> watchlist;
 }
