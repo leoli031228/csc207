@@ -11,7 +11,7 @@ public class Manga implements Media{
     private Date releaseDate;
     private String coverImage;
     private String synopsis;
-    private List<Chapter> chapters;
+    private List<String> chapters;
 
     @Override
     public String getID() {

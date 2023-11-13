@@ -11,7 +11,7 @@ public class Anime implements Media{
     private Date releaseDate;
     private String coverImage;
     private String synopsis;
-    private List<Episode> episodes;
+    private List<String> episodes;
 
     @Override
     public String getID() {
