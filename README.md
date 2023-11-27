@@ -5,65 +5,51 @@ By: Kelsie Fung, Leo Li, Alyssa Lu, Glenn Li, David Lee
 
 **Problem Domain**
 
-Our team is tentatively interested in creating an online shopping platform.
-* Users can view their shopping history.
-* Users can browse products to purchase and sort by categories.
+Our team is creating an anime and manga categorising platform where users 
+can browse new titles, track their progress, and connect with other fans.
+* Users can search titles and find information about animes/mangas
+* Users can track 
+* Users can get personalized recommendations based on their watch history and favourites
 * Users can search for items they want.
 * Users can add to cart and make payments.
-* Makes use of an API for features of an online store.
+* Makes use of an API that provides data from MyAnimeList 
 
 
 **Application Description**
 
 Our team  is thinking of developing an application where users are able to create
 an account (with their username, password, email, and phone number), then login to the app. 
-From there, they can go to their profile to view their past purchases, discounts, and 
-other suggested items to buy that are personalized to their shopping history. 
-There will be a class with methods that creates Customers as a subclass of Users, 
-and their information will be stored as attributes.
+From there, they can go to their profile to view their saved titles, their favourites, their watch history, and progress. 
 
-On the shopping page, the users are able to sort the available products by different categories 
-such as price, colour, type of clothing, etc. There should be a search feature for the user to type an 
-object they are looking for, and the app will return a list of relevant products.
-There can be a class for each category of item which extends the product class, containing the attributes 
-by which the items can be sorted (price, colour, type of clothing, stock available, size).
+On the homepage, users are able to browse featured titles and are able to filter titles by their genre or release date. 
+There is also a search feature for the user to type a title they are looking for and the program will return a list of 
+relevant titles. There can be an anime and manga class with attribute tags as a list containing the genres and tags of 
+that title.
 
-Users will also be able to add items to their cart. 
-There can be a class for cart which keeps track of the items being stored in it, 
-and has an attribute for the total amount of items, quantity of each type of item,
-the price, etc.
+Users will also be able to add titles to their favourites and log the episodes that they have watched. They can also 
+add titles that they are interested in watching to their watchlist. There can be a User class with attributes Watchlist, 
+InProgress, and Favourites to keep track of these titles. Users are also able to rate titles and write reviews. 
 
-There can be a payment screen where users review their order in the cart and enter their information for payments.
-There will be a class with methods that checks the validity of their information and 
-confirms whether the payment went through.
-
-There could also be an interface for the employees running the online store platform. 
-There can be a separate login for them to add items to the store, and facilitate payments.
-Employees can have their own class which is a subclass of Users.
+User   personalized recommendations of titles they haven’t seen before based on their watch history and favourites
 
 **Documentation for a Related API**
 
-Store API
-https://fakestoreapi.com/docs
-Payments API
-https://developer.squareup.com/reference/square
+MyAnimeList API
+https://jikan.moe/faqs
 
 ***
 
 **a screenshot of using a tool to try out the API**
 (like https://www.postman.com/Links or https://hoppscotch.io/Links)
 
-![img.png](img.png)
-![img_1.png](img_1.png)
 
 **code snippet for the minimal example API call**
 
-![minimal_call_code.png](minimal_call_code.png)
+
 
 **example output of running your Java code.**
 
-![minimal_call_output1.png](minimal_call_output1.png)
-![minimal_call_output2.png](minimal_call_output2.png)
+
 
 **a list of any technical problems blocking progress**
 
