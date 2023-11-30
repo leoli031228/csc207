@@ -13,6 +13,23 @@ public class Anime implements Media{
     private String synopsis;
     private List<String> episodes;
 
+    Anime(long animeId, String title, String genre, Date releaseDate, String coverImage, String synopsis,
+          List<String> episodes) {
+        this.animeId = animeId;
+        this.title = title;
+        this.genre = genre;
+        this.releaseDate = releaseDate;
+        this.coverImage = coverImage;
+        this.synopsis = synopsis;
+        this.episodes = episodes;
+    }
+    // for mock DAO
+    public Anime(long animeId, String title) {
+        this.animeId = animeId;
+        this.title = title;
+
+    }
+
     @Override
     public String getID() {
         return null;
