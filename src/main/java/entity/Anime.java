@@ -7,19 +7,19 @@ import java.util.List;
 public class Anime implements Media{
     private long animeId;
     private String title;
-    private String genre;
+    private List<String> genres;
     private Date releaseDate;
-    private String coverImage;
+    private String imageURL;
     private String synopsis;
     private List<String> episodes;
 
-    Anime(long animeId, String title, String genre, Date releaseDate, String coverImage, String synopsis,
+    Anime(long animeId, String title, List<String> genres, Date releaseDate, String imageURL, String synopsis,
           List<String> episodes) {
         this.animeId = animeId;
         this.title = title;
-        this.genre = genre;
+        this.genres = genres;
         this.releaseDate = releaseDate;
-        this.coverImage = coverImage;
+        this.imageURL = imageURL;
         this.synopsis = synopsis;
         this.episodes = episodes;
     }
@@ -31,7 +31,7 @@ public class Anime implements Media{
     }
 
     @Override
-    public String getID() {
+    public Integer getID() {
         return null;
     }
 
@@ -41,12 +41,17 @@ public class Anime implements Media{
     }
 
     @Override
-    public String getGenre() {
+    public List<String> getGenres() {
         return null;
     }
 
     @Override
     public LocalDateTime getReleaseDate() {
+        return null;
+    }
+
+    @Override
+    public String getImageURL() {
         return null;
     }
 }
