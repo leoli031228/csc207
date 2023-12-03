@@ -1,11 +1,8 @@
 package data_access;
 
 import entity.User;
-import entity.UserFactory;
-import interface_adapter.clear_users.ClearState;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
-import use_case.clear_users.ClearUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -14,15 +11,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, ClearUserDataAccessInterface{
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface{
 
     private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
 
     private final Map<String, User> accounts = new HashMap<>();
-
-    private UserFactory userFactory;
 
     public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
         this.userFactory = userFactory;

@@ -7,14 +7,14 @@ import java.util.List;
 public class Manga implements Media{
     private long mangaId;
     private String title;
-    private String genre;
+    private List<String> genres;
     private Date releaseDate;
-    private String coverImage;
+    private String imageURL;
     private String synopsis;
     private List<String> chapters;
 
     @Override
-    public String getID() {
+    public Integer getID() {
         return null;
     }
 
@@ -24,12 +24,16 @@ public class Manga implements Media{
     }
 
     @Override
-    public String getGenre() {
+    public List<String> getGenres() {
         return null;
     }
 
     @Override
     public LocalDateTime getReleaseDate() {
+        return null;
+    }
+
+    public String getImageURL(){
         return null;
     }
 }

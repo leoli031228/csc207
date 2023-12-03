@@ -1,13 +1,16 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface Media {
-    String getID();
+    Integer getID();
 
     String getTitle();
 
-    String getGenre();
+    List<String> getGenres();
 
     LocalDateTime getReleaseDate();
+
+    String getImageURL();
 }
