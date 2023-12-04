@@ -3,6 +3,7 @@ package use_case.search;
 import entity.Anime;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SearchInteractor implements SearchInputBoundary {
     final SearchDataAccessInterface resultsDataAccessObject;
@@ -19,8 +20,9 @@ public class SearchInteractor implements SearchInputBoundary {
         if (resultsDataAccessObject.resultsFound(searchInputData.getTitle())){
             // collect results in an Output Data object: the info the user will want to see
             // pass the Output Data invoking the Presenter
+
             SearchOutputData searchOutputData = new SearchOutputData(
-                    (ArrayList<Anime>) resultsDataAccessObject.searchByTitle(searchInputData.getTitle()));
+                    resultsDataAccessObject.searchTitle(searchInputData.getTitle()) );
             resultsPresenter.prepareResultsView(searchOutputData);
         }
         resultsPresenter.prepareFailView("No results found.");
