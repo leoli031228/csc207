@@ -67,12 +67,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         return new ArrayList<>(accounts.keySet());
     }
 
-    @Override
-    public void delete(){
-        accounts.clear();
-        this.save();
-    }
-
     private void save() {
         BufferedWriter writer;
         try {
