@@ -43,4 +43,23 @@ public class SearchInteractorTest extends TestCase {
         SearchInputBoundary interactor = new SearchInteractor(animeRepository, successPresenter);
         interactor.execute(inputTitle);
     }
+
+    @Test
+    void noResultsTest(){
+        SearchInputData inputTitle = new SearchInputData("not an anime");
+        SearchDataAccessInterface animeRepository = new MockAnimeSearchDataAccessObject();
+
+        SearchOutputBoundary failurePresenter = new SearchOutputBoundary() {
+            @Override
+            public void prepareResultsView(SearchOutputData results) {
+                fail("Use case success is unexpected");
+            }
+
+            @Override
+            public void prepareFailView(String noResults) {
+                assertEquals("No results found.", noResults);
+
+            }
+        };
+    }
 }
