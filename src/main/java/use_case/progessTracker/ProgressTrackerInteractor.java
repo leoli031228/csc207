@@ -1,4 +1,4 @@
 package use_case.progessTracker;
 
-public class ProgressTrackerInteractor {
+public class ProgressTrackerInteractor implements  ProgressTrackerInputBoundary{
 }
