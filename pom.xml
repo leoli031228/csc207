@@ -31,11 +31,26 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+
+
+
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <version>4.4</version>
             <scope>test</scope> <!--identifies the scope where the dependency is available-->
         </dependency>
 
-    </dependencies>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

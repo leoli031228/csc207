@@ -19,11 +19,22 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
         return users.containsKey(identifier);
     }
 
+    @Override
+    public boolean existsByEmail(String emailIdentifier) {
+        for (String username: users.keySet()){
+            User user = users.get(username);
+            if (user.getEmail().equals(emailIdentifier)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * @param user the data to save
      */
     @Override
     public void save(User user) {
-        users.put(user.getName(), user);
+        users.put(user.getUsername(), user);
     }
 }
