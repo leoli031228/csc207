@@ -11,7 +11,7 @@ public class FilterOutputData {
     }
 
     public HashMap<String,ArrayList<Object>> getResults(){
-        // returns a mapping of the title name to a list containing the Image URL and anime IDf
+        // returns a mapping of the title name to a list containing the Image URL and anime ID
         return results;
     }
 }

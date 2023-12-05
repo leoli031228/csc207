@@ -7,13 +7,13 @@ import java.util.List;
 public class Anime implements Media{
     private Integer animeId;
     private String title;
-    private List<Integer> genres;
+    private List<String> genres;
     private LocalDateTime releaseDate;
     private String imageURL;
     private String synopsis;
     private ArrayList<String> episodes;
 
-    Anime(Integer animeId, String title, List<Integer> genres, LocalDateTime releaseDate, String imageURL, String synopsis,
+    Anime(Integer animeId, String title, List<String> genres, LocalDateTime releaseDate, String imageURL, String synopsis,
           ArrayList<String> episodes) {
         this.animeId = animeId;
         this.title = title;
@@ -42,7 +42,7 @@ public class Anime implements Media{
     }
 
     @Override
-    public List<Integer> getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 

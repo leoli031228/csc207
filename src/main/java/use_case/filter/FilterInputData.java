@@ -1,13 +1,15 @@
 package use_case.filter;
 
-public class FilterInputData {
-    final private String genre;
+import java.util.ArrayList;
 
-    public FilterInputData(String genre) {
-        this.genre = genre;
+public class FilterInputData {
+    final private ArrayList<Integer> genreIDs;
+
+    public FilterInputData(ArrayList<Integer> genreIDs) {
+        this.genreIDs = genreIDs;
     }
 
-    String getTitle() {
-        return genre;
+    ArrayList<Integer> getGenreIDs() {
+        return genreIDs;
     }
 }

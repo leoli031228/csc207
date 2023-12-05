@@ -1,23 +1,14 @@
 package use_case.search;
 
 import data_access.MockAnimeSearchDataAccessObject;
-import entity.Anime;
 import junit.framework.TestCase;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SearchInteractorTest extends TestCase {
-
-    public void setUp() throws Exception {
-        super.setUp();
-    }
-
-    public void tearDown() throws Exception {
-    }
 
     @Test
     void resultsSuccessTest() {

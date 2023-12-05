@@ -22,7 +22,7 @@ public class FilterInteractor implements FilterInputBoundary{
             // pass the Output Data invoking the Presenter
 
             FilterOutputData filterOutputData = new FilterOutputData(
-                    resultsDataAccessObject.filterByGenre(filterInputData.getTitle()) );
+                    resultsDataAccessObject.filterByGenre(filterInputData.getGenreIDs()) );
             resultsPresenter.prepareResultsView(filterOutputData);
         }
 

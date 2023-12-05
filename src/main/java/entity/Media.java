@@ -9,7 +9,7 @@ public interface Media {
 
     String getTitle();
 
-    List<Integer> getGenres();
+    List<String> getGenres();
 
     LocalDateTime getReleaseDate();
 
