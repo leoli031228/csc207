@@ -1,6 +1,7 @@
 package entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Media {
@@ -13,4 +14,7 @@ public interface Media {
     LocalDateTime getReleaseDate();
 
     String getImageURL();
+
+    String getSynopsis();
+
 }
