@@ -77,4 +77,7 @@ public class SignupState {
                 ", repeatPassword='" + repeatPassword + '\'' +
                 '}';
     }
+
+    public String getEmail() {
+    }
 }
