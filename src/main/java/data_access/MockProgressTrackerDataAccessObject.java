@@ -6,8 +6,11 @@ import entity.User;
 import use_case.progessTracker.ProgressTrackerDataAccessInterface;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.time.Month.APRIL;
 
 public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataAccessInterface {
     // Simulating a database with a list of Anime entities
@@ -17,7 +20,7 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
 
     public MockProgressTrackerDataAccessObject() {
         // Initialize the database with some sample data
-        fakeaccount = new User("aa", "bb", "cc", 0);
+        fakeaccount = new User("aa", "bb", "cc", LocalDateTime.of(2023, 12, 1, 12,0,0));
 
 
         animeDatabase = new HashMap<>();
@@ -31,31 +34,37 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
                 "https://static.wikia.nocookie.net/shingekinokyojin/images/d/d8/Attack_on_Titan_Season_1.jpg/revision/latest?cb=20211005182832"));
         animeDatabase.put("My Hero Academia", new Anime(5, "My Hero Academia",
                 "https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/251524e3b5517b689317437d881eccf0.jpe"));
+
+        fakeaccount.getWatchlist().add(animeDatabase.get("One Piece"));
+        fakeaccount.getInProgress().add(animeDatabase.get("Naruto"));
+        fakeaccount.getInProgress().add(animeDatabase.get("Dragon Ball"));
+        fakeaccount.getStatuses().put("Completed", animeDatabase.get("Attack on Titan"));
+
     }
 
     @Override
     public void changeStatustoinProgress(User user, Media title) {
         // adds the media to the inProgress list and updates the statuses list in the user's profile
-        if (!user.getInProgress().contains(title)) { // body runs only if the media is not in the progress list
-            if (user.getWatchlist().contains(title)) { // remove the media from the watch list if it is there
-                user.getWatchlist().remove(title);
+        if (!fakeaccount.getInProgress().contains(title)) { // body runs only if the media is not in the progress list
+            if (fakeaccount.getWatchlist().contains(title)) { // remove the media from the watch list if it is there
+                fakeaccount.getWatchlist().remove(title);
             }
-            user.getInProgress().add(title);
-            user.getStatuses().put("In Progress", title); // update status to in progress
+            fakeaccount.getInProgress().add(title);
+            fakeaccount.getStatuses().put("In Progress", title); // update status to in progress
         }
     }
 
     public void changeStatustoFinished(User user, Media title) {
         // if media is in Inprogress list
-        if (user.getInProgress().contains(title)) { // remove the media from the Inprogress list if it is there
-            user.getInProgress().remove(title);
+        if (fakeaccount.getInProgress().contains(title)) { // remove the media from the Inprogress list if it is there
+            fakeaccount.getInProgress().remove(title);
             // Since the media is in the in progress list, the media was already added to the status map
             // so just update the status
-            user.getStatuses().replace("Completed", title); // update status to finished
+            fakeaccount.getStatuses().replace("Completed", title); // update status to finished
             return;
         }
         // executes this if media is not in Inprogress list, i.e. when the user finishes the media without
         // adding it to their Inprogress list
-        user.getStatuses().put("Completed", title);
+        fakeaccount.getStatuses().put("Completed", title);
     }
 }
