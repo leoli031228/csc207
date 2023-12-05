@@ -4,6 +4,7 @@ import interface_adapter.login.LoginViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.switch_view.SwitchViewController;
 import use_case.signup.SignupUserDataAccessInterface;
 
 import interface_adapter.*;
@@ -28,7 +29,8 @@ public class SignupUseCaseFactory {
 
         try {
             SignupController signupController = createUserSignupUseCase(viewManagerModel, signupViewModel, loginViewModel, userDataAccessObject);
-            return new SignupView(signupController, signupViewModel);
+            SwitchViewController switchViewController = new SwitchViewController(viewManagerModel);
+            return new SignupView(signupController, signupViewModel, switchViewController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
