@@ -19,13 +19,13 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     private final Map<String, User> accounts = new HashMap<>();
 
-    public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
-        this.userFactory = userFactory;
+    public FileUserDataAccessObject(String csvPath) throws IOException {
 
         csvFile = new File(csvPath);
         headers.put("username", 0);
         headers.put("password", 1);
-        headers.put("creation_time", 2);
+        headers.put("email", 2);
+        headers.put("creation_time", 3);
 
         if (csvFile.length() == 0) {
             save();
@@ -44,7 +44,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                     String password = String.valueOf(col[headers.get("password")]);
                     String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
                     LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
-                    User user = userFactory.create(username, password, ldt);
+                    User user = new User(username, email, password, ldt);
                     accounts.put(username, user);
                 }
             }
@@ -53,7 +53,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public void save(User user) {
-        accounts.put(user.getName(), user);
+        accounts.put(user.getUsername(), user);
         this.save();
     }
 
@@ -62,10 +62,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         return accounts.get(username);
     }
 
-    @Override
+   /* @Override
     public ArrayList<String> getUsers() {
         return new ArrayList<>(accounts.keySet());
-    }
+    }*/
 
     private void save() {
         BufferedWriter writer;
@@ -76,7 +76,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
             for (User user : accounts.values()) {
                 String line = String.format("%s,%s,%s",
-                        user.getName(), user.getPassword(), user.getCreationTime());
+                        user.getUsername(), user.getPassword(), user.getCreationTime());
                 writer.write(line);
                 writer.newLine();
             }
