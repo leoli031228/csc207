@@ -1,3 +1,4 @@
+/*
 package data_access;
 
 import entity.User;
@@ -12,22 +13,22 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface{
-
+public class FileProfileDataAccessObject */
+/*implements ... add interfaces it implements*//*
+ {
     private final File csvFile;
-
     private final Map<String, Integer> headers = new LinkedHashMap<>();
-
-    private final Map<String, User> accounts = new HashMap<>();
-
+    private final Map<String, Profile> profiles = new HashMap<>();
     public FileUserDataAccessObject(String csvPath) throws IOException {
 
         csvFile = new File(csvPath);
         headers.put("username", 0);
-        headers.put("email", 1);
-        headers.put("password", 2);
-        headers.put("creation_time", 3);
-        /*headers.put("profile", 4);*/
+        headers.put("watchlist", 1);
+        headers.put("in_progress", 2);
+        headers.put("watch_history", 3);
+        */
+/*headers.put("profile", 4);*//*
+
 
         if (csvFile.length() == 0) {
             save();
@@ -43,11 +44,15 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 while ((row = reader.readLine()) != null) {
                     String[] col = row.split(",");
                     String username = String.valueOf(col[headers.get("username")]);
-                    String email = String.valueOf(col[headers.get("email")]);
-                    String password = String.valueOf(col[headers.get("password")]);
-                    String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
-                    LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
-                    User user = new User(username, email, password, ldt, new Profile(username));
+                    String friends = String.valueOf(col[headers.get("friends")]);
+                    String watchlist = String.valueOf(col[headers.get("watchlist")]);
+                    String inProgress = String.valueOf(col[headers.get("in_progress")]);
+                    String watchHistory = String.valueOf(col[headers.get("watch_history")]);
+                    */
+/*String profile = String.valueOf(col[headers.get("profile")]);*//*
+
+                    // TODO: finish implementing to add stored profile to user
+                    User user = new User(username, email, password, ldt, new Profile(username)); //fix?
                     accounts.put(username, user);
                 }
             }
@@ -56,22 +61,26 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     // save the user into the hashMap
     @Override
-    public void save(User user) {
-        accounts.put(user.getUsername(), user);
+    public void save(Profile profile) {
+        profiles.put(user.getUsername(), profile);
         this.save();
     }
 
-    @Override
-    public User getUser(String username) {
+    */
+/*@Override
+    public User getUsername(String username) {
         return accounts.get(username);
-    }
+    }*//*
 
-   /* @Override
+
+   */
+/* @Override
     public ArrayList<String> getUsers() {
         return new ArrayList<>(accounts.keySet());
-    }*/
+    }*//*
 
-    // TODO: update this to save the user's profile
+
+    // TODO: update this
     private void save() {
         BufferedWriter writer;
         try {
@@ -93,25 +102,5 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         }
     }
 
-    /**
-     * Return whether a user exists with username identifier.
-     * @param identifier the username to check.
-     * @return whether a user exists with username identifier
-     */
-    @Override
-    public boolean existsByName(String identifier) {
-        return accounts.containsKey(identifier);
-    }
-
-    @Override
-    public boolean existsByEmail(String emailIdentifier) {
-        for (String username: accounts.keySet()){
-            User user = accounts.get(username);
-            if (user.getEmail().equals(emailIdentifier)){
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
+*/

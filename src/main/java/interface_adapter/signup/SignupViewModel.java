@@ -7,7 +7,8 @@ import java.beans.PropertyChangeSupport;
 
 public class SignupViewModel extends ViewModel {
 
-    public static final String LOGIN_BUTTON_LABEL = "Already have an account";
+    public static final String LOGIN_LABEL = "Already have an account?";
+    public static final String LOGIN_BUTTON_LABEL = "Login";
     public static final String TITLE_LABEL = "Create Your Account";
     public static final String USERNAME_LABEL = "Choose username";
     public static final String EMAIL_LABEL = "Enter your Email";

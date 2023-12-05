@@ -24,6 +24,7 @@ public class Main {
 
         // The main application window.
         JFrame application = new JFrame("Anime List Tracking Application");
+        application.setSize(8000,5000);
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
@@ -54,8 +55,8 @@ public class Main {
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
 
-//        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
-//        views.add(loginView, loginView.viewName);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+        views.add(loginView, loginView.viewName);
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);

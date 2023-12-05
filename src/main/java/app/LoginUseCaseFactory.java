@@ -1,4 +1,3 @@
-/*
 package app;
 
 import interface_adapter.ViewManagerModel;
@@ -17,8 +16,7 @@ import java.io.IOException;
 
 public class LoginUseCaseFactory {
 
-    */
-/** Prevent instantiation. *//*
+// Prevent instantiation.
 
     private LoginUseCaseFactory() {}
 
@@ -29,7 +27,8 @@ public class LoginUseCaseFactory {
             LoginUserDataAccessInterface userDataAccessObject) {
 
         try {
-            LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+            LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel,
+                                                        loggedInViewModel, userDataAccessObject);
             return new LoginView(loginViewModel, loginController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -53,4 +52,3 @@ public class LoginUseCaseFactory {
         return new LoginController(loginInteractor);
     }
 }
-*/
