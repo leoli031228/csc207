@@ -61,10 +61,14 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
             // Since the media is in the in progress list, the media was already added to the status map
             // so just update the status
             fakeaccount.getStatuses().replace("Completed", title); // update status to finished
+            // add finished media to user's watch history
+            fakeaccount.getWatchHistory().add(title);
             return;
         }
         // executes this if media is not in Inprogress list, i.e. when the user finishes the media without
         // adding it to their Inprogress list
         fakeaccount.getStatuses().put("Completed", title);
+        // add finished media to user's watch history
+        fakeaccount.getWatchHistory().add(title);
     }
 }
