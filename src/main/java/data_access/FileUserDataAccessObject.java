@@ -23,8 +23,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface /
 
         csvFile = new File(csvPath);
         headers.put("username", 0);
-        headers.put("password", 1);
-        headers.put("email", 2);
+        headers.put("email", 1);
+        headers.put("password", 2);
         headers.put("creation_time", 3);
 
         if (csvFile.length() == 0) {
@@ -41,8 +41,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface /
                 while ((row = reader.readLine()) != null) {
                     String[] col = row.split(",");
                     String username = String.valueOf(col[headers.get("username")]);
-                    String password = String.valueOf(col[headers.get("password")]);
                     String email = String.valueOf(col[headers.get("email")]);
+                    String password = String.valueOf(col[headers.get("password")]);
                     String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
                     LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
                     User user = new User(username, email, password, ldt);
@@ -77,8 +77,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface /
             writer.newLine();
 
             for (User user : accounts.values()) {
-                String line = String.format("%s,%s,%s",
-                        user.getUsername(), user.getPassword(), user.getCreationTime());
+                String line = String.format("%s,%s,%s,%s",
+                        user.getUsername(), user.getEmail(), user.getPassword(), user.getCreationTime());
                 writer.write(line);
                 writer.newLine();
             }
