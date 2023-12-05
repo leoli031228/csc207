@@ -3,6 +3,8 @@ package interface_adapter.signup;
 public class SignupState {
     private String username = "";
     private String usernameError = null;
+    private String email = "";
+    private String emailError = "";
     private String password = "";
     private String passwordError = null;
     private String repeatPassword = "";
@@ -11,6 +13,8 @@ public class SignupState {
     public SignupState(SignupState copy) {
         username = copy.username;
         usernameError = copy.usernameError;
+        email = copy.email;
+        emailError = copy.emailError;
         password = copy.password;
         passwordError = copy.passwordError;
         repeatPassword = copy.repeatPassword;
@@ -28,6 +32,12 @@ public class SignupState {
     public String getUsernameError() {
         return usernameError;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getEmailError(){ return emailError; }
 
     public String getPassword() {
         return password;
@@ -53,6 +63,14 @@ public class SignupState {
         this.usernameError = usernameError;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setEmailError(String emailError) {
+        this.emailError = emailError;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -73,11 +91,9 @@ public class SignupState {
     public String toString() {
         return "SignupState{" +
                 "username='" + username + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", repeatPassword='" + repeatPassword + '\'' +
                 '}';
-    }
-
-    public String getEmail() {
     }
 }
