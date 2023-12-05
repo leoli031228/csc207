@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Profile {
+    private final String username;
     private List<User> friends = new ArrayList<>();
     private List<Media> watchlist = new ArrayList<>();
     private List<Media> inProgress = new ArrayList<>();
@@ -13,7 +14,8 @@ public class Profile {
     private Map<String, List<Media>> statuses = new HashMap<>();
 
     // empty constructor
-    public Profile() {
+    public Profile(String username) {
+        this.username = username;
     }
 
     // Getters

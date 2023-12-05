@@ -77,7 +77,7 @@ class SignupInteractorTest {
 
         // Add Kelsie to the repo so that when we check later they already exist
         User user = new User("Kelsie", "kels@mail.ca", "pswd",
-                                                LocalDateTime.now(), new Profile());
+                                                LocalDateTime.now(), new Profile("Kelsie"));
         userRepository.save(user);
 
         // create a presenter that tests whether the test case is as we expect.
@@ -90,7 +90,7 @@ class SignupInteractorTest {
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("User already exists.", error);
+                assertEquals("Username already exists.", error);
             }
         };
 

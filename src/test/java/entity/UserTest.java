@@ -11,7 +11,8 @@ class UserTest {
     @BeforeEach
     void setUp() {
         user = new User("Kelsie", "kels@mail.utoronto.ca", "password",
-                LocalDateTime.of(2023, 12, 1, 12,0,0), new Profile());
+                LocalDateTime.of(2023, 12, 1, 12,0,0),
+                new Profile("Kelsie"));
     }
 
     @Test
