@@ -17,7 +17,7 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
 
     public MockProgressTrackerDataAccessObject() {
         // Initialize the database with some sample data
-        fakeaccount = new User("aa", "bb", "cc", );
+        fakeaccount = new User("aa", "bb", "cc", 0);
 
 
         animeDatabase = new HashMap<>();
