@@ -1,6 +1,7 @@
-/*
 package app;
 
+import entity.CommonUserFactory;
+import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginController;
@@ -17,8 +18,7 @@ import java.io.IOException;
 
 public class LoginUseCaseFactory {
 
-    */
-/** Prevent instantiation. *//*
+// Prevent instantiation.
 
     private LoginUseCaseFactory() {}
 
@@ -29,7 +29,8 @@ public class LoginUseCaseFactory {
             LoginUserDataAccessInterface userDataAccessObject) {
 
         try {
-            LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+            LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel,
+                                                        loggedInViewModel, userDataAccessObject);
             return new LoginView(loginViewModel, loginController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -47,10 +48,11 @@ public class LoginUseCaseFactory {
         // Notice how we pass this method's parameters to the Presenter.
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel, loggedInViewModel, loginViewModel);
 
+        UserFactory userFactory = new CommonUserFactory();
+
         LoginInputBoundary loginInteractor = new LoginInteractor(
                 userDataAccessObject, loginOutputBoundary);
 
         return new LoginController(loginInteractor);
     }
 }
-*/

@@ -18,7 +18,7 @@ public class SearchInteractor implements SearchInputBoundary {
         // ask DAO to fetch all the data (the entities)
         // input data (the title) specifies witch entities
         if (resultsDataAccessObject.resultsFound(searchInputData.getTitle())){
-            // collect results in an Output Data object: the info the user will want to see
+            // collect results in an Output Data object
             // pass the Output Data invoking the Presenter
 
             SearchOutputData searchOutputData = new SearchOutputData(
