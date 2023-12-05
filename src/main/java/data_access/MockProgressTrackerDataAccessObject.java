@@ -12,10 +12,13 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
     // Simulating a database with a list of Anime entities
     private Map<String, Anime> animeDatabase = new HashMap<>();
     // Create fake account
-    private User fakeaccount = new User;
+    private User fakeaccount = new User();
 
     public MockProgressTrackerDataAccessObject() {
         // Initialize the database with some sample data
+        fakeaccount = new User();
+
+
         animeDatabase = new HashMap<>();
         animeDatabase.put("One Piece", new Anime(1, "One Piece",
                 "https://upload.wikimedia.org/wikipedia/en/9/90/One_Piece%2C_Volume_61_Cover_%28Japanese%29.jpg"));
@@ -29,6 +32,7 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
                 "https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/251524e3b5517b689317437d881eccf0.jpe"));
     }
 
+    @Override
     public void changeStatustoinProgress(User user, Media title) {
         // adds the media to the inProgress list and updates the statuses list in the user's profile
         if (!user.getInProgress.contains(title)) { // body runs only if the media is not in the progress list
