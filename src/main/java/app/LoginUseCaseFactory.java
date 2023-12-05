@@ -1,3 +1,4 @@
+/*
 package app;
 
 import entity.CommonUserFactory;
@@ -18,7 +19,9 @@ import java.io.IOException;
 
 public class LoginUseCaseFactory {
 
-    /** Prevent instantiation. */
+    */
+/** Prevent instantiation. *//*
+
     private LoginUseCaseFactory() {}
 
     public static LoginView create(
@@ -54,3 +57,4 @@ public class LoginUseCaseFactory {
         return new LoginController(loginInteractor);
     }
 }
+*/
