@@ -2,6 +2,7 @@ package use_case.signup;
 
 import data_access.InMemoryUserDataAccessObject;
 import entity.User;
+import entity.Profile;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
@@ -75,7 +76,8 @@ class SignupInteractorTest {
         SignupUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
 
         // Add Kelsie to the repo so that when we check later they already exist
-        User user = new User("Kelsie", "kels@mail.ca", "pswd", LocalDateTime.now());
+        User user = new User("Kelsie", "kels@mail.ca", "pswd",
+                                                LocalDateTime.now(), new Profile());
         userRepository.save(user);
 
         // create a presenter that tests whether the test case is as we expect.

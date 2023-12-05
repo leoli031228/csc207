@@ -24,6 +24,7 @@ public class Main {
 
         // The main application window.
         JFrame application = new JFrame("Anime List Tracking Application");
+        application.setSize(8000,5000);
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
