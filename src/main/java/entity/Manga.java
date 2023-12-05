@@ -8,7 +8,7 @@ import java.util.List;
 public class Manga implements Media{
     private Integer mangaId;
     private String title;
-    private List<String> genres;
+    private List<Integer> genres;
     private LocalDateTime releaseDate;
     private String imageURL;
     private String synopsis;
@@ -25,7 +25,7 @@ public class Manga implements Media{
     }
 
     @Override
-    public List<String> getGenres() {
+    public List<Integer> getGenres() {
         return genres;
     }
 
