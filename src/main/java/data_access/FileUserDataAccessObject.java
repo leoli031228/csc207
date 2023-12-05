@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface{
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface /*, LoginUserDataAccessInterface*/{
 
     private final File csvFile;
 
@@ -35,13 +35,14 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 String header = reader.readLine();
 
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-                assert header.equals("username,password,creation_time");
+                assert header.equals("username,email,password,creation_time");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
                     String[] col = row.split(",");
                     String username = String.valueOf(col[headers.get("username")]);
                     String password = String.valueOf(col[headers.get("password")]);
+                    String email = String.valueOf(col[headers.get("email")]);
                     String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
                     LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
                     User user = new User(username, email, password, ldt);
@@ -51,16 +52,17 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         }
     }
 
+    // save the user into the hashMap
     @Override
     public void save(User user) {
         accounts.put(user.getUsername(), user);
         this.save();
     }
 
-    @Override
-    public User get(String username) {
+    /*@Override
+    public User getUsername(String username) {
         return accounts.get(username);
-    }
+    }*/
 
    /* @Override
     public ArrayList<String> getUsers() {
@@ -96,6 +98,17 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     @Override
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
+    }
+
+    @Override
+    public boolean existsByEmail(String emailIdentifier) {
+        for (String username: accounts.keySet()){
+            User user = accounts.get(username);
+            if (user.getEmail().equals(emailIdentifier)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
