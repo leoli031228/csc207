@@ -1,4 +1,3 @@
-/*
 package app;
 
 import data_access.FileUserDataAccessObject;
@@ -8,6 +7,7 @@ import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
 
+import interface_adapter.switch_view.SwitchViewController;
 import view.*;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class Main {
 
         // The main application window.
         JFrame application = new JFrame("Anime List Tracking Application");
-        application.setSize(8000,5000);
+        //application.setSize(8000,5000);
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
@@ -55,16 +55,20 @@ public class Main {
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, views, cardLayout, userDataAccessObject);
+        MainMenuView mainMenuView = new MainMenuView(new SwitchViewController(viewManagerModel));
+        views.add(mainMenuView, mainMenuView.viewName);
+
+       /* LoggedInView loggedInView = new LoggedInView(loggedInViewModel, views, cardLayout, userDataAccessObject);
         views.add(loggedInView, loggedInView.viewName);
 
         SearchFriendView searchFriendView = new SearchFriendView(userDataAccessObject, views, cardLayout, loggedInViewModel);
-        views.add(searchFriendView, searchFriendView.viewName);
+        views.add(searchFriendView, searchFriendView.viewName);*/
 
         viewManagerModel.setActiveView(signupView.viewName);
+        //viewManagerModel.setActiveView(mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
         application.setVisible(true);
     }
-}*/
+}
