@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Manga implements Media{
-    private Integer mangaId;
+    private Integer id;
     private String title;
     private List<String> genres;
     private LocalDateTime releaseDate;
@@ -16,7 +16,7 @@ public class Manga implements Media{
 
     @Override
     public Integer getID() {
-        return mangaId;
+        return id;
     }
 
     @Override
@@ -45,5 +45,56 @@ public class Manga implements Media{
 
     public ArrayList<String> getChapters() {
         return chapters;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
+
+    public void setReleaseDate(LocalDateTime releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public void setChapters(ArrayList<String> chapters) {
+        this.chapters = chapters;
+    }
+
+    @Override
+    public String toString() {
+        return "Manga{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", genres=" + genres + // turn to string
+                ", releaseDate=" + releaseDate + // turn to string
+                ", imageURL='" + imageURL + '\'' +
+                ", synopsis='" + synopsis + '\'' +
+                ", chapters=" + chapters + // turn to string
+                '}';
+    }
+
+    @Override
+    public String toSimpleString() {
+        return "Manga{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", imageURL='" + imageURL + '\'' +
+                '}';
+
     }
 }
