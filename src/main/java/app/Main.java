@@ -1,17 +1,17 @@
 package app;
 
-import data_access.FileUserDataAccessObject;
+//import data_access.FileUserDataAccessObject;
 
+import data_access.InMemoryFilterDataAccessObject;
+import data_access.MockAnimeSearchDataAccessObject;
+import interface_adapter.filter.FilterViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.search.SearchViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
 
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-
-import view.ViewManager;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +26,8 @@ public class Main {
         JFrame application = new JFrame("Anime List Tracking Application");
         application.setSize(8000,5000);
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+
 
         CardLayout cardLayout = new CardLayout();
 
@@ -45,24 +47,44 @@ public class Main {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
 
-        FileUserDataAccessObject userDataAccessObject;
-        try {
-            userDataAccessObject = new FileUserDataAccessObject("./users.csv");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        SearchViewModel searchViewModel = new SearchViewModel();
 
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
-        views.add(signupView, signupView.viewName);
+//        FileUserDataAccessObject userDataAccessObject;
+//        try {
+//            userDataAccessObject = new FileUserDataAccessObject("./users.csv");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
-        views.add(loginView, loginView.viewName);
+
+//        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
+//        views.add(signupView, signupView.viewName);
+//
+//        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+//        views.add(loginView, loginView.viewName);
+
+
+        MockAnimeSearchDataAccessObject mediaDataAccessObject = new MockAnimeSearchDataAccessObject();
+        InMemoryFilterDataAccessObject filterDataAccessObject = new InMemoryFilterDataAccessObject();
+
+        SearchView searchView = SearchUseCaseFactory.create(viewManagerModel, searchViewModel, new FilterViewModel(),
+                mediaDataAccessObject,
+                filterDataAccessObject);
+
+
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);
 
-        viewManagerModel.setActiveView(signupView.viewName);
+//        SearchView searchView = new SearchView(searchViewModel);
+//        views.add(searchView, searchView.viewName);
+
+//        viewManagerModel.setActiveView(signupView.viewName);
+//        viewManagerModel.firePropertyChanged();
+        viewManagerModel.setActiveView(searchView.viewName);
         viewManagerModel.firePropertyChanged();
+
+
 
         application.pack();
         application.setVisible(true);
