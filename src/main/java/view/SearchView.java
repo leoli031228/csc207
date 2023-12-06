@@ -109,8 +109,10 @@ public class SearchView implements ActionListener, PropertyChangeListener {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt){
                         if (evt.getSource().equals(searchButton)) {
+
                             // get input title from the search field
                             String titleSearched = searchField.getText();
+ 
                             searchController.execute(titleSearched);
 
                         }

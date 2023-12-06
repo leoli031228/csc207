@@ -1,7 +1,10 @@
 package app;
 
-import data_access.FileUserDataAccessObject;
+//import data_access.FileUserDataAccessObject;
 
+import data_access.InMemoryFilterDataAccessObject;
+import data_access.MockAnimeSearchDataAccessObject;
+import interface_adapter.filter.FilterViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.search.SearchViewModel;
@@ -46,19 +49,27 @@ public class Main {
 
         SearchViewModel searchViewModel = new SearchViewModel();
 
-        FileUserDataAccessObject userDataAccessObject;
-        try {
-            userDataAccessObject = new FileUserDataAccessObject("./users.csv");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        FileUserDataAccessObject userDataAccessObject;
+//        try {
+//            userDataAccessObject = new FileUserDataAccessObject("./users.csv");
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
-        views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
-        views.add(loginView, loginView.viewName);
+//        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
+//        views.add(signupView, signupView.viewName);
+//
+//        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+//        views.add(loginView, loginView.viewName);
 
+
+        MockAnimeSearchDataAccessObject mediaDataAccessObject = new MockAnimeSearchDataAccessObject();
+        InMemoryFilterDataAccessObject filterDataAccessObject = new InMemoryFilterDataAccessObject();
+
+        SearchView searchView = SearchUseCaseFactory.create(viewManagerModel, searchViewModel, new FilterViewModel(),
+                mediaDataAccessObject,
+                filterDataAccessObject);
 
 
 
@@ -68,10 +79,12 @@ public class Main {
 //        SearchView searchView = new SearchView(searchViewModel);
 //        views.add(searchView, searchView.viewName);
 
-        viewManagerModel.setActiveView(signupView.viewName);
+//        viewManagerModel.setActiveView(signupView.viewName);
+//        viewManagerModel.firePropertyChanged();
+        viewManagerModel.setActiveView(searchView.viewName);
         viewManagerModel.firePropertyChanged();
 
-        views.setPreferredSize(new Dimension(800, 600));
+
 
         application.pack();
         application.setVisible(true);
