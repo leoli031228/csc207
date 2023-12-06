@@ -19,6 +19,10 @@ public class Profile {
     }
 
     // Getters
+    public String getUsername() {
+        return username;
+    }
+
     public List<User> getFriends() {
         return friends;
     }
@@ -141,7 +145,7 @@ public class Profile {
     // turns statuses to a mapping of Status to
     public String statusesToString(Map<String, List<Media>> statuses){
         StringBuilder statusesString = new StringBuilder();
-        statusesString.append("[");
+        statusesString.append("{");
         for (String status: statuses.keySet()){
             String mediaList = mediaListToString(statuses.get(status));
             statusesString.append(status).append(":").append(mediaList).append(",");
@@ -149,7 +153,7 @@ public class Profile {
         if (!watchlist.isEmpty()) {
             statusesString.setLength(statusesString.length() - 1);
         }
-        statusesString.append("]");
+        statusesString.append("}");
         return statusesString.toString();
     }
 

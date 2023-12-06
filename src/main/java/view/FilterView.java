@@ -1,3 +1,4 @@
+/*
 package view;
 
 import interface_adapter.filter.FilterController;
@@ -98,3 +99,4 @@ public class FilterView extends JFrame implements ActionListener, PropertyChange
 
     }
 }
+*/

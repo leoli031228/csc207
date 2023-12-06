@@ -1,4 +1,3 @@
-/*
 package data_access;
 
 import entity.User;
@@ -13,21 +12,18 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FileProfileDataAccessObject */
-/*implements ... add interfaces it implements*//*
- {
+public class FileProfileDataAccessObject /*implements*/{
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, Profile> profiles = new HashMap<>();
-    public FileUserDataAccessObject(String csvPath) throws IOException {
+    public FileProfileDataAccessObject(String csvPath) throws IOException {
 
         csvFile = new File(csvPath);
         headers.put("username", 0);
-        headers.put("watchlist", 1);
-        headers.put("in_progress", 2);
-        headers.put("watch_history", 3);
-        */
-/*headers.put("profile", 4);*//*
+        headers.put("friends", 1);
+        headers.put("watchlist", 2);
+        headers.put("in_progress", 3);
+        headers.put("watch_history", 4);
 
 
         if (csvFile.length() == 0) {
@@ -38,7 +34,7 @@ public class FileProfileDataAccessObject */
                 String header = reader.readLine();
 
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-                assert header.equals("username,email,password,creation_time,profile");
+                assert header.equals("username,friends,watchlist,in_progress,watch_history");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
@@ -48,12 +44,13 @@ public class FileProfileDataAccessObject */
                     String watchlist = String.valueOf(col[headers.get("watchlist")]);
                     String inProgress = String.valueOf(col[headers.get("in_progress")]);
                     String watchHistory = String.valueOf(col[headers.get("watch_history")]);
-                    */
-/*String profile = String.valueOf(col[headers.get("profile")]);*//*
 
-                    // TODO: finish implementing to add stored profile to user
-                    User user = new User(username, email, password, ldt, new Profile(username)); //fix?
-                    accounts.put(username, user);
+                    // TODO: create profile from file...
+                    Profile profile = new Profile(username);
+                    // set lists in profile
+
+
+                    profiles.put(username, profile);
                 }
             }
         }
@@ -62,22 +59,20 @@ public class FileProfileDataAccessObject */
     // save the user into the hashMap
     @Override
     public void save(Profile profile) {
-        profiles.put(user.getUsername(), profile);
+        profiles.put(profile.getUsername(), profile);
         this.save();
     }
 
-    */
-/*@Override
+    @Override
     public User getUsername(String username) {
         return accounts.get(username);
-    }*//*
+    }
 
 
-   */
-/* @Override
+    @Override
     public ArrayList<String> getUsers() {
         return new ArrayList<>(accounts.keySet());
-    }*//*
+    }
 
 
     // TODO: update this
@@ -103,4 +98,3 @@ public class FileProfileDataAccessObject */
     }
 
 }
-*/
