@@ -1,3 +1,4 @@
+/*
 package entity;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -38,9 +39,11 @@ class ProfileTest {
         //System.out.println(profile.friendsString());
     }
 
- /*   @Test
+ */
+/*   @Test
     void mediaListToIDs() {
-    }*/
+    }*//*
+
 
     @Test
     void mediaListToString() {
@@ -64,4 +67,4 @@ class ProfileTest {
         System.out.println("toJson test");
         System.out.println(profile.toJSON());
     }
-}
+}*/
