@@ -14,13 +14,15 @@ public class User {
     private final String password;
     private final LocalDateTime creationTime;
     private Profile profile;
+    private ArrayList<User> friendlist;
 
-    public User(String username, String email, String password, LocalDateTime creationTime, Profile profile) {
+    public User(String username, String email, String password, LocalDateTime creationTime, Profile profile, ArrayList<User> friendlist) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.creationTime = creationTime;
         this.profile = profile;
+        this.friendlist = friendlist;
     }
 
     // Getters
@@ -44,6 +46,12 @@ public class User {
     public Profile getProfile(){ return profile; }
 
     public void setProfile(Profile profile){ this.profile = profile; }
+
+    public ArrayList<User> getFriendlist() {
+        return friendlist;
+    }
+
+    public void addFriend(User friend){this.friendlist.add(friend);}
 
     @Override
     public String toString() {
