@@ -1,3 +1,4 @@
+/*
 package app;
 
 import interface_adapter.ViewManagerModel;
@@ -70,3 +71,4 @@ public class SearchUseCaseFactory {
         return new FilterController(filterInteractor);
     }
 }
+*/

@@ -1,6 +1,13 @@
+/*
+
 package app;
 
+
+import data_access.FileUserDataAccessObject;
+import data_access.FileProfileDataAccessObject;
+
 //import data_access.FileUserDataAccessObject;
+
 
 import data_access.InMemoryFilterDataAccessObject;
 import data_access.MockAnimeSearchDataAccessObject;
@@ -72,6 +79,17 @@ public class Main {
                 filterDataAccessObject);
 
 
+        FileProfileDataAccessObject profileDataAccessObject;
+        try {
+            profileDataAccessObject = new FileProfileDataAccessObject("./profiles.json");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
+        views.add(signupView, signupView.viewName);
+
+
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);
@@ -90,3 +108,4 @@ public class Main {
         application.setVisible(true);
     }
 }
+*/
