@@ -3,16 +3,10 @@ package data_access;
 import entity.Anime;
 import entity.Media;
 import entity.Profile;
-import entity.User;
 import use_case.progessTracker.ProgressTrackerDataAccessInterface;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static java.time.Month.APRIL;
 
 public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataAccessInterface {
     // Simulating a database with a list of Anime entities
@@ -45,32 +39,35 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
     }
 
     @Override
-    public void changeStatustoinProgress(User user, Media title) {
+
+    public boolean existsinWatchHistory(Profile profile, Media title) {
+        return profile.getWatchHistory().contains(title);
+    }
+
+    public void changeStatustoinProgress(Profile profile, Media title) {
         // adds the media to the inProgress list and updates the statuses list in the user's profile
-        if (!fakeaccount.getInProgress().contains(title)) { // body runs only if the media is not in the progress list
-            if (fakeaccount.getWatchlist().contains(title)) { // remove the media from the watch list if it is there
-                fakeaccount.removeFromWatchlist(title);
+        if (!profile.getInProgress().contains(title)) { // body runs only if the media is not in the progress list
+            if (profile.getWatchlist().contains(title)) { // remove the media from the watch list if it is there
+                profile.removeFromWatchlist(title);
             }
-            fakeaccount.addToInProgress(title);
-            fakeaccount.addtoStatus("In Progress", title); // update status to in progress
+            profile.addToInProgress(title);
+            profile.removeFromsStatus("Watchlist", title);
+            profile.addtoStatus("In Progress", title); // update status to in progress
         }
     }
 
-    public void changeStatustoFinished(User user, Media title) {
+    public void changeStatustoFinished(Profile profile, Media title) {
         // if media is in Inprogress list
-        if (fakeaccount.getInProgress().contains(title)) { // remove the media from the Inprogress list if it is there
-            fakeaccount.removeFromInProgress(title);
-            // Since the media is in the in progress list, remove from the list of in progress media
-            fakeaccount.removeFromsStatus("In Progress", title);
-            fakeaccount.addtoStatus("Completed", title); // update status to finished
-            // add finished media to user's watch history
-            fakeaccount.addToWatchHistory(title);
-            return;
+        if (profile.getInProgress().contains(title)) { // remove the media from the Inprogress list if it is there
+            profile.removeFromInProgress(title);
         }
-        // executes this if media is not in Inprogress list, i.e. when the user finishes the media without
-        // adding it to their Inprogress list
-        fakeaccount.addtoStatus("Completed", title);
+        // Since the media is in the in progress list, remove from the list of in progress media
+        profile.removeFromsStatus("In Progress", title);
+        profile.addtoStatus("Completed", title); // update status to finished
         // add finished media to user's watch history
-        fakeaccount.addToWatchHistory(title);
+        profile.addToWatchHistory(title);
+    }
+    public boolean existsinInProgress(Profile profile, Media title) {
+        return profile.getInProgress().contains(title);
     }
 }

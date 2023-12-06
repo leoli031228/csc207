@@ -3,5 +3,5 @@ package use_case.progessTracker;
 public interface ProgressTrackerOutputBoundary {
     void prepareSuccessView(ProgressTrackerOutputData results);
 
-    void prepareFailView(String noResults);
+    void prepareFailView(String error);
 }

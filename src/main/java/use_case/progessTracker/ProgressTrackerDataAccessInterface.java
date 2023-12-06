@@ -1,9 +1,12 @@
 package use_case.progessTracker;
 
 import entity.Media;
-import entity.User;
+import entity.Profile;
 
 public interface ProgressTrackerDataAccessInterface {
-    void changeStatustoinProgress(User user, Media title);
-    void changeStatustoFinished(User user, Media title);
+    void changeStatustoinProgress(Profile profile, Media title);
+    boolean existsinInProgress(Profile profile,Media title);
+    void changeStatustoFinished(Profile profile,Media title);
+
+    boolean existsinWatchHistory(Profile profile, Media media);
 }
