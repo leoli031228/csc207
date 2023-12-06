@@ -105,7 +105,9 @@ public class Profile {
     }
 
     public void removeFromsStatus(String status, Media media) {
-        this.statuses.get(status).remove(media);
+        if (this.statuses.containsKey(status)) {
+            this.statuses.get(status).remove(media);
+        }
     }
 
     // Lists to Strings
