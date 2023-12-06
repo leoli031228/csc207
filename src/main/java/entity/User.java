@@ -23,6 +23,14 @@ public class User {
         this.profile = profile;
     }
 
+    // simpler constructor
+    public User(String username, String email){
+        this.username = username;
+        this.email = email;
+        this.password = null;
+        this.creationTime = null;
+    }
+
     // Getters
 
     public String getUsername() {

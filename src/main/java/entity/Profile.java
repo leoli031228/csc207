@@ -1,5 +1,6 @@
 package entity;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -145,13 +146,15 @@ public class Profile {
     }*/
 
     public String mediaListToString(List<Media> mediaList){
-        JSONObject medialist = new JSONObject();
+        JSONArray medialist = new JSONArray();
         for (Media media: mediaList){
-            JSONObject item = new JSONObject();
-            item.put("id", media.getID());
-            item.put("title", media.getTitle());
-            item.put("imageURL", media.getImageURL());
-            medialist.put(media.getTitle(), item);
+            JSONObject jsonMedia = new JSONObject();
+            JSONObject mediaObject = new JSONObject();
+            mediaObject.put("id", media.getID());
+            mediaObject.put("title", media.getTitle());
+            mediaObject.put("imageURL", media.getImageURL());
+            jsonMedia.put(media.getTitle(), mediaObject);
+            medialist.put(jsonMedia);
         }
         return medialist.toString();
     }
@@ -193,10 +196,10 @@ public class Profile {
             return "{" +
                     "\"username\":" + '\"' + username + '\"' +
                     ", \"friends\":" + friendsString() +// NOTE: friends would be given as string json of Usernames & Emails
-                    ", \"watchlist\":" + '\"' + mediaListToString(watchlist) + '\"' + // NOTE: lists would be given as string list of IDs
-                    ", \"inProgress\":" + '\"' + mediaListToString(inProgress) + '\"' +
-                    ", \"watchHistory\":" + '\"' + mediaListToString(watchHistory) + '\"' +
-                    ", \"statuses\":" + statusesToString(statuses) +
+                    ", \"watchlist\":" + mediaListToString(watchlist) + // NOTE: lists would be given as string list of IDs
+                    ", \"inProgress\":" + mediaListToString(inProgress) +
+                    ", \"watchHistory\":" +  mediaListToString(watchHistory) +
+                    /*", \"statuses\":" + statusesToString(statuses) +*/
                     '}';
 
         } catch (Exception e) {

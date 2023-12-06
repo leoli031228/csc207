@@ -25,7 +25,6 @@ class ProfileTest {
         profile.addToInProgress(test);
         profile.addToInProgress(test2);
         profile.addToWatchHistory(test2);
-        //profile.setStatuses({"watchlist": profile.getWatchlist(),"in progress": profile.getInProgress(),});
     }
 
 
@@ -44,8 +43,8 @@ class ProfileTest {
 
     @Test
     void mediaListToString() {
-        assertEquals("{\"Naruto\":{\"imageURL\":\"url.com\",\"id\":1,\"title\":\"Naruto\"},"+
-                "\"One Piece\":{\"imageURL\":\"url.com\",\"id\":2,\"title\":\"One Piece\"}}"
+        assertEquals("[{\"Naruto\":{\"imageURL\":\"url.com\",\"id\":1,\"title\":\"Naruto\"}},"+
+                "{\"One Piece\":{\"imageURL\":\"url.com\",\"id\":2,\"title\":\"One Piece\"}}]"
                 ,profile.mediaListToString(profile.getInProgress()));
         //System.out.println(profile.mediaListToString(profile.getInProgress()));
     }
@@ -61,7 +60,7 @@ class ProfileTest {
 
     @Test
     void toJSON() {
-        System.out.println("toJson test");
+        //System.out.println("toJson test");
         System.out.println(profile.toJSON());
     }
 }
