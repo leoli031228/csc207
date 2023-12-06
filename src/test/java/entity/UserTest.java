@@ -1,4 +1,3 @@
-/*
 
 package entity;
 import java.time.LocalDateTime;
@@ -85,4 +84,3 @@ class UserTest {
 //    }
 //}
 
-*/

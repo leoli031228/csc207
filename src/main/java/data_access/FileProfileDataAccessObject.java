@@ -1,4 +1,3 @@
-/*
 package data_access;
 
 import entity.User;
@@ -22,8 +21,8 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
-public class FileProfileDataAccessObject */
-/*implements*//*
+public class FileProfileDataAccessObject
+implements
 {
     private final File jsonFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -59,8 +58,7 @@ public class FileProfileDataAccessObject */
                 throw new FileNotFoundException("File reading error");
             }
 
-            */
-/*try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
+try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String header = reader.readLine();
 
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
@@ -83,32 +81,29 @@ public class FileProfileDataAccessObject */
 
                     profiles.put(username, profile);
                 }
-            }*//*
+            }
 
         }
     }
 
     // save the user into the hashMap
-    */
-/*@Override
+@Override
     public void save(Profile profile) {
         profiles.put(profile.getUsername(), profile);
         this.save();
-    }*//*
+    }
 
 
-   */
-/* @Override
+ @Override
     public Profile getUsername(String username) {
         return profile.get(username);
-    }*//*
+    }
 
 
-   */
-/* @Override
+ @Override
     public ArrayList<String> getProfiles() {
         return new ArrayList<>(profile.keySet());
-    }*//*
+    }
 
 
     private void save() {
@@ -128,4 +123,3 @@ public class FileProfileDataAccessObject */
     }
 
 }
-*/

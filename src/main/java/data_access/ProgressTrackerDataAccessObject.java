@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataAccessInterface {
+public class ProgressTrackerDataAccessObject implements ProgressTrackerDataAccessInterface {
     // Simulating a database with a list of Anime entities
     private Map<String, Anime> animeDatabase = new HashMap<>();
     // Create fake account
@@ -21,7 +21,7 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
             new ArrayList<>());
     Profile fakeaccount = fakeuser.getProfile();
 
-    public MockProgressTrackerDataAccessObject() {
+    public ProgressTrackerDataAccessObject() {
         // Initialize the database with some sample data
 
 

@@ -1,4 +1,3 @@
-/*
 package use_case.login;
 
 import data_access.InMemoryUserDataAccessObject;
@@ -100,4 +99,4 @@ class LoginInteractorTest {
         LoginInputBoundary interactor = new LoginInteractor(userRepository, failurePresenter);
         interactor.execute(inputData);
     }
-}*/
+}
