@@ -21,13 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SearchView implements ActionListener, PropertyChangeListener {
-//    public static void main(String[] args) {
-//        // Sample data for anime
-//        List<Anime> animeList = getSampleAnimeData();
-//
-//        // Create and show the GUI
-//        SwingUtilities.invokeLater(() -> animeGridResults(animeList));
-//    }
+
     public final String viewName = "search";
     private final SearchController searchController;
     private final FilterController filterController;
@@ -112,7 +106,7 @@ public class SearchView implements ActionListener, PropertyChangeListener {
 
                             // get input title from the search field
                             String titleSearched = searchField.getText();
- 
+
                             searchController.execute(titleSearched);
 
                         }
@@ -147,7 +141,7 @@ public class SearchView implements ActionListener, PropertyChangeListener {
             Image image = ImageIO.read(url);
 
             // Make image fit in JLabel
-            Image scaledImage = image.getScaledInstance(70, 150, Image.SCALE_DEFAULT);
+            Image scaledImage = image.getScaledInstance(80, 150, Image.SCALE_DEFAULT);
 
             return new ImageIcon(scaledImage);
         } catch (IOException e) {

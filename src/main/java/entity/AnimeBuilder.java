@@ -3,12 +3,13 @@ package entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AnimeBuilder implements MediaBuilder{
     private Integer id;
     private String title;
     private String imageURL;
-    private List<String> genres;
+    private Map<String,Integer> genres;
     private LocalDateTime releaseDate;
     private String synopsis;
     private ArrayList<String> episodes;
@@ -35,7 +36,7 @@ public class AnimeBuilder implements MediaBuilder{
         return this;
     }
 
-    public AnimeBuilder genres(List<String> genres) {
+    public AnimeBuilder genres(Map<String,Integer> genres) {
         this.genres = genres;
         return this;
     }
@@ -57,7 +58,7 @@ public class AnimeBuilder implements MediaBuilder{
 
     @Override
     public Anime buildSimple() {
-        return new Anime(id, title, imageURL);
+        return new Anime(id, title, genres, imageURL);
     }
 
     @Override

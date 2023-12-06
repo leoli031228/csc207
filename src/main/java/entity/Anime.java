@@ -3,17 +3,18 @@ package entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Anime implements Media{
     private Integer id;
     private String title;
-    private List<String> genres;
+    private Map<String,Integer> genres;
     private LocalDateTime releaseDate;
     private String imageURL;
     private String synopsis;
     private ArrayList<String> episodes;
 
-    Anime(Integer id, String title, List<String> genres, LocalDateTime releaseDate, String imageURL, String synopsis,
+    Anime(Integer id, String title, Map<String,Integer> genres, LocalDateTime releaseDate, String imageURL, String synopsis,
           ArrayList<String> episodes) {
         this.id = id;
         this.title = title;
@@ -24,9 +25,10 @@ public class Anime implements Media{
         this.episodes = episodes;
     }
     // for mock DAO
-    public Anime(Integer id, String title, String imageURL) {
+    public Anime(Integer id, String title, Map<String,Integer> genres, String imageURL) {
         this.id = id;
         this.title = title;
+        this.genres = genres;
         this.imageURL = imageURL;
 
     }
@@ -42,7 +44,7 @@ public class Anime implements Media{
     }
 
     @Override
-    public List<String> getGenres() {
+    public Map<String,Integer> getGenres() {
         return genres;
     }
 
@@ -75,7 +77,7 @@ public class Anime implements Media{
     }
 
     @Override
-    public void setGenres(List<String> genres) {
+    public void setGenres(Map<String,Integer> genres) {
         this.genres = genres;
     }
 

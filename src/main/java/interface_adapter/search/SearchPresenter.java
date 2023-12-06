@@ -32,8 +32,6 @@ public class SearchPresenter implements SearchOutputBoundary {
 
         viewManagerModel.setActiveView(searchViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-
-
     }
 
     @Override
