@@ -1,5 +1,7 @@
 package entity;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -125,7 +127,7 @@ public class Profile {
         return ids;
     }
 
-    // turns list of media IDs to a String.
+    /*// turns list of media IDs to a String.
     public String mediaListToString(List<Media> mediaList){
         List<Integer> ids = mediaListToIDs(mediaList);
 
@@ -140,7 +142,21 @@ public class Profile {
         }
         idsString.append("]");
         return idsString.toString();
+    }*/
+
+    public String mediaListToString(List<Media> mediaList){
+        JSONObject medialist = new JSONObject();
+        for (Media media: mediaList){
+            JSONObject item = new JSONObject();
+            item.append("id", media.getID());
+            item.append("title", media.getTitle());
+            item.append("imageURL", media.getImageURL());
+            medialist.append(media.getTitle(), item);
+        }
+        return medialist.toString();
     }
+
+
 
     // turns statuses to a mapping of Status to
     public String statusesToString(Map<String, List<Media>> statuses){

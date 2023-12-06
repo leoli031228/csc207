@@ -50,6 +50,7 @@ public class FileProfileDataAccessObject /*implements*/{
                     // set lists in profile
 
 
+
                     profiles.put(username, profile);
                 }
             }
@@ -57,22 +58,21 @@ public class FileProfileDataAccessObject /*implements*/{
     }
 
     // save the user into the hashMap
-    @Override
+    /*@Override
     public void save(Profile profile) {
         profiles.put(profile.getUsername(), profile);
         this.save();
-    }
+    }*/
 
-    @Override
-    public User getUsername(String username) {
-        return accounts.get(username);
-    }
+   /* @Override
+    public Profile getUsername(String username) {
+        return profile.get(username);
+    }*/
 
-
-    @Override
-    public ArrayList<String> getUsers() {
-        return new ArrayList<>(accounts.keySet());
-    }
+   /* @Override
+    public ArrayList<String> getProfiles() {
+        return new ArrayList<>(profile.keySet());
+    }*/
 
 
     // TODO: update this
@@ -83,9 +83,10 @@ public class FileProfileDataAccessObject /*implements*/{
             writer.write(String.join(",", headers.keySet()));
             writer.newLine();
 
-            for (User user : accounts.values()) {
+            for (Profile profile : profiles.values()) {
+
                 String line = String.format("%s,%s,%s,%s",
-                        user.getUsername(), user.getEmail(), user.getPassword(), user.getCreationTime());
+                        profile.getUsername(),;
                 writer.write(line);
                 writer.newLine();
             }
