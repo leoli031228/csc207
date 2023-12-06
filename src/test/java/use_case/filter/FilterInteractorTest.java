@@ -1,9 +1,7 @@
 package use_case.filter;
 
-import data_access.InMemoryFilterDataAccessObject;
 import data_access.MockAnimeSearchDataAccessObject;
 import junit.framework.TestCase;
-import org.junit.Test;
 
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ public class FilterInteractorTest extends TestCase {
         ArrayList<Integer> genreIDs = new ArrayList<>();
         genreIDs.add(1);
         FilterInputData inputTitle = new FilterInputData(genreIDs);
-        FilterDataAccessInterface animeRepository = new InMemoryFilterDataAccessObject();
+        FilterDataAccessInterface animeRepository = new MockAnimeSearchDataAccessObject();
 
         FilterOutputBoundary successPresenter = new FilterOutputBoundary() {
             @Override
@@ -29,11 +27,6 @@ public class FilterInteractorTest extends TestCase {
                 assertEquals(expectedResults, results.getResults());
             }
 
-            @Override
-            public void prepareFailView(String noResults) {
-                fail("Use case failure is unexpected");
-
-            }
         };
         FilterInputBoundary interactor = new FilterInteractor(animeRepository, successPresenter);
         interactor.execute(inputTitle);

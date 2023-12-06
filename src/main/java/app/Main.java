@@ -2,7 +2,6 @@ package app;
 
 //import data_access.FileUserDataAccessObject;
 
-import data_access.InMemoryFilterDataAccessObject;
 import data_access.MockAnimeSearchDataAccessObject;
 import interface_adapter.filter.FilterViewModel;
 import interface_adapter.login.LoginViewModel;
@@ -15,7 +14,6 @@ import view.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
