@@ -17,8 +17,7 @@ public class ProgressTrackerDataAccessObject implements ProgressTrackerDataAcces
     // Create fake account
     private User fakeuser = new User("David", "123@gmail.com", "Lee",
             LocalDateTime.now(),
-            new Profile("David"),
-            new ArrayList<>());
+            new Profile("David"));
     Profile fakeaccount = fakeuser.getProfile();
 
     public ProgressTrackerDataAccessObject() {
