@@ -70,24 +70,25 @@ public class FilterView extends JFrame implements ActionListener, PropertyChange
 
 
         public void actionPerformed(ActionEvent evt) {
-            if (evt.getSource().equals(filter)) {
 
-                genres.setSelectionMode(
-                        ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-
-                JOptionPane.showMessageDialog(this, new JScrollPane(genres));
-                List selected = genres.getSelectedValuesList();
-
-                List<Integer> selectedGenreIDs = new ArrayList<>();
-                for (Object selectedGenre : selected) {
-                    Integer genreID = genreToID.get(selectedGenre);
-                    if (genreID != null) {
-                        selectedGenreIDs.add(genreID);
-                    }
-                }
-                filterController.execute(selectedGenreIDs);
-            }
+//            if (evt.getSource().equals(filter)) {
+//
+//                genres.setSelectionMode(
+//                        ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+//
+//
+//                JOptionPane.showMessageDialog(this, new JScrollPane(genres));
+//                List selected = genres.getSelectedValuesList();
+//
+//                List<Integer> selectedGenreIDs = new ArrayList<>();
+//                for (Object selectedGenre : selected) {
+//                    Integer genreID = genreToID.get(selectedGenre);
+//                    if (genreID != null) {
+//                        selectedGenreIDs.add(genreID);
+//                    }
+//                }
+//                filterController.execute(selectedGenreIDs);
+//            }
         }
 
 
