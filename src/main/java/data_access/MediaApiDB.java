@@ -1,3 +1,4 @@
+/*
 package data_access;
 
 import entity.Media;
@@ -31,3 +32,4 @@ public class MediaApiDB implements SearchDataAccessInterface {
         return null;
     }
 }
+*/

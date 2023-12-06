@@ -4,6 +4,7 @@ import entity.User;
 import entity.Profile;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class SignupInteractor implements SignupInputBoundary {
     final SignupUserDataAccessInterface userDataAccessObject;
@@ -28,7 +29,7 @@ public class SignupInteractor implements SignupInputBoundary {
             LocalDateTime now = LocalDateTime.now();
             User user = new User(signupInputData.getUsername(), signupInputData.getEmail(),
                                                 signupInputData.getPassword(), now,
-                                                new Profile(signupInputData.getUsername()));
+                                                new Profile(signupInputData.getUsername()), new ArrayList<>());
             userDataAccessObject.save(user);
 
             SignupOutputData signupOutputData = new SignupOutputData(user.getUsername(), user.getEmail(),

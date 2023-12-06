@@ -13,6 +13,8 @@ public class Anime implements Media{
     private String synopsis;
     private ArrayList<String> episodes;
 
+    Anime(){}
+
     Anime(Integer id, String title, List<String> genres, LocalDateTime releaseDate, String imageURL, String synopsis,
           ArrayList<String> episodes) {
         this.id = id;
@@ -120,4 +122,12 @@ public class Anime implements Media{
                 ", imageURL='" + imageURL + '\'' +
                 '}';
     }
+
+    // Builder
+    public static AnimeBuilder builder() {
+        return new AnimeBuilder();
+    }
+
+    // EXAMPLE:
+    // Anime.builder().id(1).title("Naruto").imageURL("url.").buildSimple();
 }

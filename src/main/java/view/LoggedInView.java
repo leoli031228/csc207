@@ -1,8 +1,8 @@
 package view;
 
+import data_access.FileUserDataAccessObject;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
-import interface_adapter.login.LoginState;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,17 +13,32 @@ import java.beans.PropertyChangeListener;
 
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    public final String viewName = "logged in";
+    public static final String viewName = "logged in";
     private final LoggedInViewModel loggedInViewModel;
+
+    // 新加的搜索
+    private JButton searchFriendButton;
+    private JButton showFriendsButton;
 
     JLabel username;
 
     final JButton logOut;
 
+    private final JPanel cardPanel;
+    private final CardLayout cardLayout;
+    private final FileUserDataAccessObject userDataAccessObject;
+
     /**
      * A window with a title and a JButton.
      */
-    public LoggedInView(LoggedInViewModel loggedInViewModel) {
+    public LoggedInView(final LoggedInViewModel loggedInViewModel,
+                        // 新加的两个，用来换 view
+                        final JPanel cardPanel,
+                        final CardLayout cardLayout,
+                        final FileUserDataAccessObject userDataAccessObject) {
+        this.cardPanel = cardPanel;
+        this.cardLayout = cardLayout;
+        this.userDataAccessObject = userDataAccessObject;
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
@@ -45,13 +60,40 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(usernameInfo);
         this.add(username);
         this.add(buttons);
+
+        // 新加的搜索
+        searchFriendButton = new JButton("Search Friend");
+        buttons.add(searchFriendButton);
+        searchFriendButton.addActionListener(this);
+
+        // 新加的 show friends
+        showFriendsButton = new JButton("Show My Friends");
+        showFriendsButton.addActionListener(this);
+        buttons.add(showFriendsButton);
+
     }
 
     /**
      * React to a button click that results in evt.
      */
     public void actionPerformed(ActionEvent evt) {
-        System.out.println("Click " + evt.getActionCommand());
+        // 改的
+        if (evt.getSource() == logOut) {
+            // Log out action
+            System.out.println("Clicked Log out");
+        } else if (evt.getSource() == searchFriendButton) {
+            // Search friend action
+            // Here, you can switch the view to SearchFriendView, or open a dialog/window for it
+            System.out.println("Search Friend clicked");
+            cardLayout.show(cardPanel, SearchFriendView.viewName);
+        } else if (evt.getSource() == showFriendsButton) {
+            // Navigate to the friends list view
+            // You need to implement this navigation based on your application's architecture
+            System.out.println("Show Friends Button clicked");
+            cardPanel.add(new FriendsListView(loggedInViewModel.getLoggedInUser(),
+                    cardPanel, cardLayout, userDataAccessObject), FriendsListView.viewName);
+            cardLayout.show(cardPanel, FriendsListView.viewName);
+        }
     }
 
     @Override

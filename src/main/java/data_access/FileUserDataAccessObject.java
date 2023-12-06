@@ -7,10 +7,7 @@ import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface{
 
@@ -47,7 +44,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                     String password = String.valueOf(col[headers.get("password")]);
                     String creationTimeText = String.valueOf(col[headers.get("creation_time")]);
                     LocalDateTime ldt = LocalDateTime.parse(creationTimeText);
-                    User user = new User(username, email, password, ldt, new Profile(username));
+                    User user = new User(username, email, password, ldt, new Profile(username), new ArrayList<>());
                     accounts.put(username, user);
                 }
             }
@@ -114,4 +111,19 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
         return false;
     }
 
+    /**
+     * Search for users whose username or email contains the search query.
+     * @param searchQuery The query to search for.
+     * @return A list of Users whose username or email contains the search query.
+     */
+    public List<User> searchUsers(String searchQuery) {
+        List<User> matchingUsers = new ArrayList<>();
+        for (User user : accounts.values()) {
+            if (user.getUsername().toLowerCase().contains(searchQuery.toLowerCase())
+                    || user.getEmail().toLowerCase().contains(searchQuery.toLowerCase())) {
+                matchingUsers.add(user);
+            }
+        }
+        return matchingUsers;
+    }
 }
