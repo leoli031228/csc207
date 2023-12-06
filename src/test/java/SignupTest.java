@@ -1,4 +1,4 @@
-//
-//public class SignupTest {
-//
-//}
+
+public class SignupTest {
+
+}
