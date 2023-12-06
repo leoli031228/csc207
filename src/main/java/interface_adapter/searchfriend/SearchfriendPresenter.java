@@ -15,14 +15,12 @@ public class SearchfriendPresenter implements SearchfriendOutputBoundary{
         this.viewManagerModel = viewManagerModel;
 
     }
-    @Override
     public void prepareResultsView(SearchOutputData results) {
         // If title results are found, load resulting titles and their images
 
 
     }
 
-    @Override
     public void prepareFailView(String noResults) {
         // If no results are found, show message "No results found"
 

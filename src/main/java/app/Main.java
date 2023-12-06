@@ -7,11 +7,7 @@ import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
 
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-
-import view.ViewManager;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,8 +54,11 @@ public class Main {
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, views, cardLayout, userDataAccessObject);
         views.add(loggedInView, loggedInView.viewName);
+
+        SearchFriendView searchFriendView = new SearchFriendView(userDataAccessObject, views, cardLayout, loggedInViewModel);
+        views.add(searchFriendView, searchFriendView.viewName);
 
         viewManagerModel.setActiveView(signupView.viewName);
         viewManagerModel.firePropertyChanged();

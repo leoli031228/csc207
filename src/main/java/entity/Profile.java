@@ -1,5 +1,7 @@
 package entity;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +21,10 @@ public class Profile {
     }
 
     // Getters
+    public String getUsername() {
+        return username;
+    }
+
     public List<User> getFriends() {
         return friends;
     }
@@ -125,7 +131,7 @@ public class Profile {
         return ids;
     }
 
-    // turns list of media IDs to a String.
+    /*// turns list of media IDs to a String.
     public String mediaListToString(List<Media> mediaList){
         List<Integer> ids = mediaListToIDs(mediaList);
 
@@ -140,20 +146,34 @@ public class Profile {
         }
         idsString.append("]");
         return idsString.toString();
+    }*/
+
+    public String mediaListToString(List<Media> mediaList){
+        JSONObject medialist = new JSONObject();
+        for (Media media: mediaList){
+            JSONObject item = new JSONObject();
+            item.put("id", media.getID());
+            item.put("title", media.getTitle());
+            item.put("imageURL", media.getImageURL());
+            medialist.put(media.getTitle(), item);
+        }
+        return medialist.toString();
     }
+
+
 
     // turns statuses to a mapping of Status to
     public String statusesToString(Map<String, List<Media>> statuses){
         StringBuilder statusesString = new StringBuilder();
-        statusesString.append("[");
+        statusesString.append("{");
         for (String status: statuses.keySet()){
             String mediaList = mediaListToString(statuses.get(status));
-            statusesString.append(status).append(":").append(mediaList).append(",");
+            statusesString.append('\"'+status+'\"').append(":").append(mediaList).append(",");
         }
+        statusesString.append("}");
         if (!watchlist.isEmpty()) {
-            statusesString.setLength(statusesString.length() - 1);
+            statusesString.setLength(statusesString.length() - 2);
         }
-        statusesString.append("]");
         return statusesString.toString();
     }
 
@@ -162,11 +182,30 @@ public class Profile {
     public String toString() {
 
         return "Profile{" +
+                "username=" + username + '\'' +
                 "friends=" + friendsString() + '\'' + // NOTE: friends would be given as string json of Usernames & Emails
                 ", watchlist=" + mediaListToString(watchlist) + '\'' + // NOTE: lists would be given as string list of IDs
                 ", inProgress=" + mediaListToString(inProgress) + '\'' +
                 ", watchHistory=" + mediaListToString(watchHistory) + '\'' +
                 ", statuses=" + statusesToString(statuses) + '\'' +
                 '}';
+    }
+
+    // testing to JSON OBJECT
+    public String toJSON(){
+        try {
+            return "{" +
+                    "\"username\":" + '\"' + username + '\"' +
+                    ", \"friends\":" + friendsString() +// NOTE: friends would be given as string json of Usernames & Emails
+                    ", \"watchlist\":" + '\"' + mediaListToString(watchlist) + '\"' + // NOTE: lists would be given as string list of IDs
+                    ", \"inProgress\":" + '\"' + mediaListToString(inProgress) + '\"' +
+                    ", \"watchHistory\":" + '\"' + mediaListToString(watchHistory) + '\"' +
+                    ", \"statuses\":" + statusesToString(statuses) +
+                    '}';
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
