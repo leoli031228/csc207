@@ -32,7 +32,7 @@ public class ProgressTrackerInteractor implements  ProgressTrackerInputBoundary{
             progtrackDataAccessObject.changeStatustoFinished(profile, inputData.getMedia());
         }
 
-        ProgressTrackerOutputData progtrackOutputData = new ProgressTrackerOutputData(profile, false);
+        ProgressTrackerOutputData progtrackOutputData = new ProgressTrackerOutputData(inputData.getUser(), false);
         progtrackPresenter.prepareSuccessView(progtrackOutputData);
 
     }
