@@ -63,11 +63,10 @@ public class Main {
 
 
         MockAnimeSearchDataAccessObject mediaDataAccessObject = new MockAnimeSearchDataAccessObject();
-        InMemoryFilterDataAccessObject filterDataAccessObject = new InMemoryFilterDataAccessObject();
 
         SearchView searchView = SearchUseCaseFactory.create(viewManagerModel, searchViewModel, new FilterViewModel(),
                 mediaDataAccessObject,
-                filterDataAccessObject);
+                mediaDataAccessObject);
 
 
 
