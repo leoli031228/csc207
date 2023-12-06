@@ -25,6 +25,10 @@ public class SearchView implements ActionListener, PropertyChangeListener {
     public final String viewName = "search";
     private final SearchController searchController;
     private final FilterController filterController;
+
+    private final JFrame frame = new JFrame("Anime Search Results");
+    // main panel
+    private final JPanel mainPanel = new JPanel(new BorderLayout());
     // Create a panel for the grid with GridLayout
     private final JPanel gridPanel = new JPanel(new GridLayout(3, 3, 10, 10));
 
@@ -43,23 +47,21 @@ public class SearchView implements ActionListener, PropertyChangeListener {
         searchViewModel.addPropertyChangeListener(this);
         filterViewModel.addPropertyChangeListener(this);
 
-        JFrame frame = new JFrame("Anime Search Results");
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // main panel
-        JPanel mainPanel = new JPanel(new BorderLayout());
 
         // Create a panel for the search bar and filter options
         JPanel searchFilterPanel = new JPanel(new BorderLayout());
 
         // Create a panel for the genre filter on the left side
         JPanel genreFilterPanel = new JPanel(new BorderLayout());
-        String[] genreFilters = {"All Genres", "Action", "Adventure", "Drama", "Fantasy", "Horror", "Mystery"};
+        String[] genreFilters = { "Action", "Adventure", "Drama", "Fantasy", "Horror", "Mystery", "Sci-Fi"};
         JList genreList = new JList(genreFilters);
         genreList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         // Add the "Filter:" label above the genre list
-        genreFilterPanel.add(new JLabel("Filter:"), BorderLayout.NORTH);
+        genreFilterPanel.add(new JLabel("Genres"), BorderLayout.NORTH);
         genreFilterPanel.add(genreList, BorderLayout.CENTER);
 
         // filter panel
@@ -78,7 +80,7 @@ public class SearchView implements ActionListener, PropertyChangeListener {
         searchPanel.add(searchButton);
 
         // Add the search panel to the NORTH position
-        searchFilterPanel.add(searchPanel, BorderLayout.NORTH);
+        mainPanel.add(searchPanel, BorderLayout.NORTH);
 
         // Add the search and genre filter panel to the WEST position
         mainPanel.add(searchFilterPanel, BorderLayout.WEST);
@@ -154,26 +156,27 @@ public class SearchView implements ActionListener, PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+
         SearchState state = (SearchState) evt.getNewValue();
         // get results from the state which is a mapping of the anime title to an array list containing the ID
         // and the image url
         Map<String, ArrayList<Object>> results = state.getResults();
         List<String> animeList = new ArrayList<>(results.keySet());
 
-        // Clear the current grid panel
+        // clear current grid panel
         gridPanel.removeAll();
-
-
         for (String anime : animeList) {
-            String imageURL = (String) results.get(anime).get(1);
+            String imageURL = (String) results.get(anime).get(0);
             gridPanel.add(createAnimeCard(anime, imageURL));
         }
-
-        // Repaint the grid panel to reflect the changes
+        // repaint the grid panel with new search results
         gridPanel.revalidate();
         gridPanel.repaint();
+        // update scroll pane with new grid panel
+        scrollPane.setViewportView(gridPanel);
 
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

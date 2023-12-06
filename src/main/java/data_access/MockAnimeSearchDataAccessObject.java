@@ -38,6 +38,13 @@ public class MockAnimeSearchDataAccessObject implements SearchDataAccessInterfac
                 "https://static.wikia.nocookie.net/shingekinokyojin/images/d/d8/Attack_on_Titan_Season_1.jpg/revision/latest?cb=20211005182832" ));
         animeDatabase.put("My Hero Academia", new Anime(5, "My Hero Academia",genres5,
                 "https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/251524e3b5517b689317437d881eccf0.jpe"));
+        animeDatabase.put("Jujutsu Kaisen", new Anime(6, "Jujutsu Kaisen",genres5,
+                "https://images.justwatch.com/poster/306336521/s332/season-2"));
+        animeDatabase.put("Jujutsu Kaisen 0", new Anime(7, "Jujutsu Kaisen 0",genres5,
+                "https://m.media-amazon.com/images/M/MV5BODM0NmVjMzUtOTJhNi00N2ZhLWFkYmMtYmZmNjRiY2M1YWY4XkEyXkFqcGdeQXVyOTgxOTA5MDg@._V1_.jpg"));
+        animeDatabase.put("Jujutsu Kaisen Official PV", new Anime(7, "Jujutsu Kaisen Official PV",genres5,
+                "https://m.media-amazon.com/images/M/MV5BMTMwMDM4N2EtOTJiYy00OTQ0LThlZDYtYWUwOWFlY2IxZGVjXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"));
+
     }
 
     @Override
