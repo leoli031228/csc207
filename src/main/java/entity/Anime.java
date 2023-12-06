@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Anime implements Media{
-    private Integer animeId;
+    private Integer id;
     private String title;
     private List<String> genres;
     private LocalDateTime releaseDate;
@@ -13,9 +13,9 @@ public class Anime implements Media{
     private String synopsis;
     private ArrayList<String> episodes;
 
-    Anime(Integer animeId, String title, List<String> genres, LocalDateTime releaseDate, String imageURL, String synopsis,
+    Anime(Integer id, String title, List<String> genres, LocalDateTime releaseDate, String imageURL, String synopsis,
           ArrayList<String> episodes) {
-        this.animeId = animeId;
+        this.id = id;
         this.title = title;
         this.genres = genres;
         this.releaseDate = releaseDate;
@@ -24,8 +24,8 @@ public class Anime implements Media{
         this.episodes = episodes;
     }
     // for mock DAO
-    public Anime(Integer animeId, String title, String imageURL) {
-        this.animeId = animeId;
+    public Anime(Integer id, String title, String imageURL) {
+        this.id = id;
         this.title = title;
         this.imageURL = imageURL;
 
@@ -33,7 +33,7 @@ public class Anime implements Media{
 
     @Override
     public Integer getID() {
-        return animeId;
+        return id;
     }
 
     @Override
@@ -64,4 +64,68 @@ public class Anime implements Media{
         return episodes;
     }
 
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
+
+    @Override
+    public void setReleaseDate(LocalDateTime releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    @Override
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    @Override
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
+    }
+
+    public void setEpisodes(ArrayList<String> episodes) {
+        this.episodes = episodes;
+    }
+
+    // to String
+    @Override
+    public String toString() {
+        return "Anime{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", genres=" + genres + // turn to string
+                ", releaseDate=" + releaseDate + // turn to string
+                ", imageURL='" + imageURL + '\'' +
+                ", synopsis='" + synopsis + '\'' +
+                ", episodes=" + episodes + // turn to string
+                '}';
+    }
+
+    @Override
+    public String toSimpleString() {
+        return "Anime{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", imageURL='" + imageURL + '\'' +
+                '}';
+    }
+
+    // Builder
+    public static AnimeBuilder builder() {
+        return new AnimeBuilder();
+    }
+
+    // EXAMPLE:
+    // Anime.builder().id(1).title("Naruto").imageURL("url.").buildSimple();
 }

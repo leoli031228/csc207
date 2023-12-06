@@ -3,42 +3,68 @@ package data_access;
 
 import entity.User;
 import entity.Profile;
+
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
+
+
 public class FileProfileDataAccessObject */
-/*implements ... add interfaces it implements*//*
- {
-    private final File csvFile;
+/*implements*//*
+{
+    private final File jsonFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, Profile> profiles = new HashMap<>();
-    public FileUserDataAccessObject(String csvPath) throws IOException {
+    public FileProfileDataAccessObject(String filePath) throws IOException {
 
-        csvFile = new File(csvPath);
-        headers.put("username", 0);
-        headers.put("watchlist", 1);
-        headers.put("in_progress", 2);
-        headers.put("watch_history", 3);
-        */
-/*headers.put("profile", 4);*//*
+        jsonFile = new File(filePath);
 
 
-        if (csvFile.length() == 0) {
+        if (jsonFile.length() == 0) {
             save();
         } else {
 
-            try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
+            // trying to read file as JSON
+            try{
+                String jsonContent = new String(Files.readAllBytes(Paths.get(filePath)));
+
+                // Parse the JSON array
+                JSONArray jsonArray = new JSONArray(jsonContent);
+
+                ArrayList<JSONObject> jsonMedias = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonMedia = jsonArray.getJSONObject(i);
+                    jsonMedias.add(jsonMedia);
+                }
+
+                // TODO: create profile from file...
+                Profile profile = new Profile(username);
+                // set lists in profile
+                profiles.put(username, profile);
+
+            }catch(IOException e){
+                throw new FileNotFoundException("File reading error");
+            }
+
+            */
+/*try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
                 String header = reader.readLine();
 
                 // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-                assert header.equals("username,email,password,creation_time,profile");
+                assert header.equals("username,friends,watchlist,in_progress,watch_history");
 
                 String row;
                 while ((row = reader.readLine()) != null) {
@@ -48,55 +74,54 @@ public class FileProfileDataAccessObject */
                     String watchlist = String.valueOf(col[headers.get("watchlist")]);
                     String inProgress = String.valueOf(col[headers.get("in_progress")]);
                     String watchHistory = String.valueOf(col[headers.get("watch_history")]);
-                    */
-/*String profile = String.valueOf(col[headers.get("profile")]);*//*
 
-                    // TODO: finish implementing to add stored profile to user
-                    User user = new User(username, email, password, ldt, new Profile(username)); //fix?
-                    accounts.put(username, user);
+                    // TODO: create profile from file...
+                    Profile profile = new Profile(username);
+                    // set lists in profile
+
+
+
+                    profiles.put(username, profile);
                 }
-            }
+            }*//*
+
         }
     }
 
     // save the user into the hashMap
-    @Override
-    public void save(Profile profile) {
-        profiles.put(user.getUsername(), profile);
-        this.save();
-    }
-
     */
 /*@Override
-    public User getUsername(String username) {
-        return accounts.get(username);
+    public void save(Profile profile) {
+        profiles.put(profile.getUsername(), profile);
+        this.save();
     }*//*
 
 
    */
 /* @Override
-    public ArrayList<String> getUsers() {
-        return new ArrayList<>(accounts.keySet());
+    public Profile getUsername(String username) {
+        return profile.get(username);
     }*//*
 
 
-    // TODO: update this
+   */
+/* @Override
+    public ArrayList<String> getProfiles() {
+        return new ArrayList<>(profile.keySet());
+    }*//*
+
+
     private void save() {
         BufferedWriter writer;
         try {
-            writer = new BufferedWriter(new FileWriter(csvFile));
-            writer.write(String.join(",", headers.keySet()));
-            writer.newLine();
-
-            for (User user : accounts.values()) {
-                String line = String.format("%s,%s,%s,%s",
-                        user.getUsername(), user.getEmail(), user.getPassword(), user.getCreationTime());
-                writer.write(line);
-                writer.newLine();
+            writer = new BufferedWriter(new FileWriter(jsonFile));
+            writer.write("[");
+            for (Profile profile : profiles.values()) {
+                writer.write(profile.toJSON());
+                writer.write(",");
             }
-
+            writer.write("]");
             writer.close();
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
