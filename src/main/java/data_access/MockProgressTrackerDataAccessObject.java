@@ -2,12 +2,14 @@ package data_access;
 
 import entity.Anime;
 import entity.Media;
+import entity.Profile;
 import entity.User;
 import use_case.progessTracker.ProgressTrackerDataAccessInterface;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static java.time.Month.APRIL;
@@ -16,11 +18,11 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
     // Simulating a database with a list of Anime entities
     private Map<String, Anime> animeDatabase = new HashMap<>();
     // Create fake account
-    private User fakeaccount;
+    private Profile fakeaccount;
 
     public MockProgressTrackerDataAccessObject() {
         // Initialize the database with some sample data
-        fakeaccount = new User("aa", "bb", "cc", LocalDateTime.of(2023, 12, 1, 12,0,0));
+        fakeaccount = new Profile("aa");
 
 
         animeDatabase = new HashMap<>();
@@ -35,10 +37,10 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
         animeDatabase.put("My Hero Academia", new Anime(5, "My Hero Academia",
                 "https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/251524e3b5517b689317437d881eccf0.jpe"));
 
-        fakeaccount.getWatchlist().add(animeDatabase.get("One Piece"));
-        fakeaccount.getInProgress().add(animeDatabase.get("Naruto"));
-        fakeaccount.getInProgress().add(animeDatabase.get("Dragon Ball"));
-        fakeaccount.getStatuses().put("Completed", animeDatabase.get("Attack on Titan"));
+        fakeaccount.addToWatchlist(animeDatabase.get("One Piece"));
+        fakeaccount.addToInProgress(animeDatabase.get("Naruto"));
+        fakeaccount.addToInProgress(animeDatabase.get("Dragon Ball"));
+        fakeaccount.addtoStatus("Completed", animeDatabase.get("Attack on Titan"));
 
     }
 
@@ -47,28 +49,28 @@ public class MockProgressTrackerDataAccessObject implements ProgressTrackerDataA
         // adds the media to the inProgress list and updates the statuses list in the user's profile
         if (!fakeaccount.getInProgress().contains(title)) { // body runs only if the media is not in the progress list
             if (fakeaccount.getWatchlist().contains(title)) { // remove the media from the watch list if it is there
-                fakeaccount.getWatchlist().remove(title);
+                fakeaccount.removeFromWatchlist(title);
             }
-            fakeaccount.getInProgress().add(title);
-            fakeaccount.getStatuses().put("In Progress", title); // update status to in progress
+            fakeaccount.addToInProgress(title);
+            fakeaccount.addtoStatus("In Progress", title); // update status to in progress
         }
     }
 
     public void changeStatustoFinished(User user, Media title) {
         // if media is in Inprogress list
         if (fakeaccount.getInProgress().contains(title)) { // remove the media from the Inprogress list if it is there
-            fakeaccount.getInProgress().remove(title);
-            // Since the media is in the in progress list, the media was already added to the status map
-            // so just update the status
-            fakeaccount.getStatuses().replace("Completed", title); // update status to finished
+            fakeaccount.removeFromInProgress(title);
+            // Since the media is in the in progress list, remove from the list of in progress media
+            fakeaccount.removeFromsStatus("In Progress", title);
+            fakeaccount.addtoStatus("Completed", title); // update status to finished
             // add finished media to user's watch history
-            fakeaccount.getWatchHistory().add(title);
+            fakeaccount.addToWatchHistory(title);
             return;
         }
         // executes this if media is not in Inprogress list, i.e. when the user finishes the media without
         // adding it to their Inprogress list
-        fakeaccount.getStatuses().put("Completed", title);
+        fakeaccount.addtoStatus("Completed", title);
         // add finished media to user's watch history
-        fakeaccount.getWatchHistory().add(title);
+        fakeaccount.addToWatchHistory(title);
     }
 }
