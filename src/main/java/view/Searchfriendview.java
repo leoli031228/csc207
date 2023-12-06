@@ -1,3 +1,4 @@
+/*
 package view;
 
 import data_access.FileUserDataAccessObject;
@@ -111,3 +112,4 @@ public class SearchFriendView extends JPanel implements ActionListener, Property
         resultList.setModel(model);
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package view;
 
 import data_access.FileUserDataAccessObject;
@@ -53,3 +54,4 @@ public class FriendsListView extends JPanel {
     }
 }
 
+*/
