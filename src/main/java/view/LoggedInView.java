@@ -1,3 +1,4 @@
+/*
 package view;
 
 import data_access.FileUserDataAccessObject;
@@ -28,9 +29,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     private final CardLayout cardLayout;
     private final FileUserDataAccessObject userDataAccessObject;
 
-    /**
+    */
+/**
      * A window with a title and a JButton.
-     */
+     *//*
+
     public LoggedInView(final LoggedInViewModel loggedInViewModel,
                         // 新加的两个，用来换 view
                         final JPanel cardPanel,
@@ -73,9 +76,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     }
 
-    /**
+    */
+/**
      * React to a button click that results in evt.
-     */
+     *//*
+
     public void actionPerformed(ActionEvent evt) {
         // 改的
         if (evt.getSource() == logOut) {
@@ -101,4 +106,4 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         LoggedInState state = (LoggedInState) evt.getNewValue();
         username.setText(state.getUsername());
     }
-}
+}*/

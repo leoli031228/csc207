@@ -16,13 +16,12 @@ public class User {
     private Profile profile;
     private ArrayList<User> friendlist;
 
-    public User(String username, String email, String password, LocalDateTime creationTime, Profile profile, ArrayList<User> friendlist) {
+    public User(String username, String email, String password, LocalDateTime creationTime, Profile profile) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.creationTime = creationTime;
         this.profile = profile;
-        this.friendlist = friendlist;
     }
 
     // simpler constructor
