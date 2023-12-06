@@ -25,6 +25,14 @@ public class User {
         this.friendlist = friendlist;
     }
 
+    // simpler constructor
+    public User(String username, String email){
+        this.username = username;
+        this.email = email;
+        this.password = null;
+        this.creationTime = null;
+    }
+
     // Getters
 
     public String getUsername() {
