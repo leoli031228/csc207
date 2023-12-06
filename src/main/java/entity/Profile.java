@@ -84,8 +84,8 @@ public class Profile {
         this.watchHistory.add(media);
     }
 
-    // TODO: david will implement this
-    public void setStatus(String status) {
+    public void addtoStatus(String status, Media media) {
+        this.statuses.computeIfAbsent(status, k -> new ArrayList<>()).add(media);
     }
 
     // Remove from Lists
@@ -103,6 +103,12 @@ public class Profile {
 
     public void removeFromWatchHistory(Media media) {
         this.watchHistory.remove(media);
+    }
+
+    public void removeFromsStatus(String status, Media media) {
+        if (this.statuses.containsKey(status)) {
+            this.statuses.get(status).remove(media);
+        }
     }
 
     // Lists to Strings
