@@ -1,6 +1,9 @@
+/*
+
 package app;
 
 import data_access.FileUserDataAccessObject;
+import data_access.FileProfileDataAccessObject;
 
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
@@ -52,6 +55,13 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        FileProfileDataAccessObject profileDataAccessObject;
+        try {
+            profileDataAccessObject = new FileProfileDataAccessObject("./profiles.json");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
 
@@ -68,3 +78,4 @@ public class Main {
         application.setVisible(true);
     }
 }
+*/

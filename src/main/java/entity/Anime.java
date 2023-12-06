@@ -120,4 +120,12 @@ public class Anime implements Media{
                 ", imageURL='" + imageURL + '\'' +
                 '}';
     }
+
+    // Builder
+    public static AnimeBuilder builder() {
+        return new AnimeBuilder();
+    }
+
+    // EXAMPLE:
+    // Anime.builder().id(1).title("Naruto").imageURL("url.").buildSimple();
 }

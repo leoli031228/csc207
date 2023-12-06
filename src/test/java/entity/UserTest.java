@@ -34,4 +34,13 @@ class UserTest {
         assertEquals(LocalDateTime.of(2023, 12, 1, 12,0,0),
                 user.getCreationTime());
     }
+
+    @Test
+    void testToString() {
+        assertEquals("{" +
+                "\"username\":" + '\"' + user.getUsername() + '\"' +
+                ", \"email\":" + '\"' + user.getEmail() + '\"'
+                + '}', user.toString());
+        System.out.println(user.toString());
+    }
 }

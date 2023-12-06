@@ -148,10 +148,10 @@ public class Profile {
         JSONObject medialist = new JSONObject();
         for (Media media: mediaList){
             JSONObject item = new JSONObject();
-            item.append("id", media.getID());
-            item.append("title", media.getTitle());
-            item.append("imageURL", media.getImageURL());
-            medialist.append(media.getTitle(), item);
+            item.put("id", media.getID());
+            item.put("title", media.getTitle());
+            item.put("imageURL", media.getImageURL());
+            medialist.put(media.getTitle(), item);
         }
         return medialist.toString();
     }
@@ -164,12 +164,12 @@ public class Profile {
         statusesString.append("{");
         for (String status: statuses.keySet()){
             String mediaList = mediaListToString(statuses.get(status));
-            statusesString.append(status).append(":").append(mediaList).append(",");
-        }
-        if (!watchlist.isEmpty()) {
-            statusesString.setLength(statusesString.length() - 1);
+            statusesString.append('\"'+status+'\"').append(":").append(mediaList).append(",");
         }
         statusesString.append("}");
+        if (!watchlist.isEmpty()) {
+            statusesString.setLength(statusesString.length() - 2);
+        }
         return statusesString.toString();
     }
 
@@ -178,11 +178,30 @@ public class Profile {
     public String toString() {
 
         return "Profile{" +
+                "username=" + username + '\'' +
                 "friends=" + friendsString() + '\'' + // NOTE: friends would be given as string json of Usernames & Emails
                 ", watchlist=" + mediaListToString(watchlist) + '\'' + // NOTE: lists would be given as string list of IDs
                 ", inProgress=" + mediaListToString(inProgress) + '\'' +
                 ", watchHistory=" + mediaListToString(watchHistory) + '\'' +
                 ", statuses=" + statusesToString(statuses) + '\'' +
                 '}';
+    }
+
+    // testing to JSON OBJECT
+    public String toJSON(){
+        try {
+            return "{" +
+                    "\"username\":" + '\"' + username + '\"' +
+                    ", \"friends\":" + friendsString() +// NOTE: friends would be given as string json of Usernames & Emails
+                    ", \"watchlist\":" + '\"' + mediaListToString(watchlist) + '\"' + // NOTE: lists would be given as string list of IDs
+                    ", \"inProgress\":" + '\"' + mediaListToString(inProgress) + '\"' +
+                    ", \"watchHistory\":" + '\"' + mediaListToString(watchHistory) + '\"' +
+                    ", \"statuses\":" + statusesToString(statuses) +
+                    '}';
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
