@@ -25,10 +25,9 @@ public class Anime implements Media{
         this.episodes = episodes;
     }
     // for mock DAO
-    public Anime(Integer id, String title, Map<String,Integer> genres, String imageURL) {
+    public Anime(Integer id, String title, String imageURL) {
         this.id = id;
         this.title = title;
-        this.genres = genres;
         this.imageURL = imageURL;
 
     }
@@ -122,6 +121,7 @@ public class Anime implements Media{
                 ", imageURL='" + imageURL + '\'' +
                 '}';
     }
+//TODO: check
     @Override
     public boolean equals(Media media) {
         if (this == media) return true;
@@ -140,5 +140,9 @@ public class Anime implements Media{
     @Override
     public int hashCode() {
         return Objects.hash(id, title, genres, releaseDate, imageURL, synopsis, episodes);
+
+    public static AnimeBuilder builder() {
+        return new AnimeBuilder();
+
     }
 }

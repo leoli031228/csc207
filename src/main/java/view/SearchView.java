@@ -1,6 +1,5 @@
 package view;
 
-import entity.Anime;
 import interface_adapter.filter.FilterController;
 import interface_adapter.filter.FilterState;
 import interface_adapter.filter.FilterViewModel;
@@ -238,6 +237,9 @@ public class SearchView implements ActionListener, PropertyChangeListener {
         }
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
 
     @Override
     public void actionPerformed(ActionEvent evt) {

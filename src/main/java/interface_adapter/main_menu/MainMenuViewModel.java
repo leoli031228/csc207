@@ -21,7 +21,6 @@ public class MainMenuViewModel extends ViewModel {
     }
 
 
-
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     @Override
