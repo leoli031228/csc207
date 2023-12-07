@@ -1,5 +1,8 @@
 package entity;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,8 +84,8 @@ public class Profile {
         this.watchHistory.add(media);
     }
 
-    // TODO: david will implement this
-    public void setStatus(String status) {
+    public void addtoStatus(String status, Media media) {
+        this.statuses.computeIfAbsent(status, k -> new ArrayList<>()).add(media);
     }
 
     // Remove from Lists
@@ -100,6 +103,12 @@ public class Profile {
 
     public void removeFromWatchHistory(Media media) {
         this.watchHistory.remove(media);
+    }
+
+    public void removeFromsStatus(String status, Media media) {
+        if (this.statuses.containsKey(status)) {
+            this.statuses.get(status).remove(media);
+        }
     }
 
     // Lists to Strings
@@ -125,7 +134,7 @@ public class Profile {
         return ids;
     }
 
-    // turns list of media IDs to a String.
+    /*// turns list of media IDs to a String.
     public String mediaListToString(List<Media> mediaList){
         List<Integer> ids = mediaListToIDs(mediaList);
 
@@ -140,7 +149,23 @@ public class Profile {
         }
         idsString.append("]");
         return idsString.toString();
+    }*/
+
+    public String mediaListToString(List<Media> mediaList){
+        JSONArray medialist = new JSONArray();
+        for (Media media: mediaList){
+            JSONObject jsonMedia = new JSONObject();
+            JSONObject mediaObject = new JSONObject();
+            mediaObject.put("id", media.getID());
+            mediaObject.put("title", media.getTitle());
+            mediaObject.put("imageURL", media.getImageURL());
+            jsonMedia.put(media.getTitle(), mediaObject);
+            medialist.put(jsonMedia);
+        }
+        return medialist.toString();
     }
+
+
 
     // turns statuses to a mapping of Status to
     public String statusesToString(Map<String, List<Media>> statuses){
@@ -148,12 +173,12 @@ public class Profile {
         statusesString.append("{");
         for (String status: statuses.keySet()){
             String mediaList = mediaListToString(statuses.get(status));
-            statusesString.append(status).append(":").append(mediaList).append(",");
-        }
-        if (!watchlist.isEmpty()) {
-            statusesString.setLength(statusesString.length() - 1);
+            statusesString.append('\"'+status+'\"').append(":").append(mediaList).append(",");
         }
         statusesString.append("}");
+        if (!watchlist.isEmpty()) {
+            statusesString.setLength(statusesString.length() - 2);
+        }
         return statusesString.toString();
     }
 
@@ -162,11 +187,30 @@ public class Profile {
     public String toString() {
 
         return "Profile{" +
+                "username=" + username + '\'' +
                 "friends=" + friendsString() + '\'' + // NOTE: friends would be given as string json of Usernames & Emails
                 ", watchlist=" + mediaListToString(watchlist) + '\'' + // NOTE: lists would be given as string list of IDs
                 ", inProgress=" + mediaListToString(inProgress) + '\'' +
                 ", watchHistory=" + mediaListToString(watchHistory) + '\'' +
                 ", statuses=" + statusesToString(statuses) + '\'' +
                 '}';
+    }
+
+    // testing to JSON OBJECT
+    public String toJSON(){
+        try {
+            return "{" +
+                    "\"username\":" + '\"' + username + '\"' +
+                    ", \"friends\":" + friendsString() +// NOTE: friends would be given as string json of Usernames & Emails
+                    ", \"watchlist\":" + mediaListToString(watchlist) + // NOTE: lists would be given as string list of IDs
+                    ", \"inProgress\":" + mediaListToString(inProgress) +
+                    ", \"watchHistory\":" +  mediaListToString(watchHistory) +
+                    /*", \"statuses\":" + statusesToString(statuses) +*/
+                    '}';
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

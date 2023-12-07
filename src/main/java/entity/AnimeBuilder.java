@@ -66,7 +66,4 @@ public class AnimeBuilder implements MediaBuilder{
         return new Anime(id, title, genres, releaseDate, imageURL, synopsis, episodes);
     }
 
-    public static AnimeBuilder builder() {
-        return new AnimeBuilder();
-    }
 }
