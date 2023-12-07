@@ -26,30 +26,30 @@ public class ProgressTrackerDataAccessObject implements ProgressTrackerDataAcces
 
         Map<String, Integer> genres = new HashMap<>();
         animeDatabase = new HashMap<>();
-        animeDatabase.put("One Piece", new Anime(1, "One Piece", genres,
+        animeDatabase.put("One Piece", new Anime(1, "One Piece",
                 "https://upload.wikimedia.org/wikipedia/en/9/90/One_Piece%2C_Volume_61_Cover_%28Japanese%29.jpg"));
-        animeDatabase.put("Naruto", new Anime(2, "Naruto", genres,
+        animeDatabase.put("Naruto", new Anime(2, "Naruto",
                 "https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg"));
-        animeDatabase.put("Dragon Ball", new Anime(3, "Dragon Ball", genres,
+        animeDatabase.put("Dragon Ball", new Anime(3, "Dragon Ball",
                 "https://m.media-amazon.com/images/M/MV5BYzI0YjYxY2UtNzRjNS00NTZiLTgzMDItNGEzMjU5MmE0ZWJmXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"));
-        animeDatabase.put("Attack on Titan", new Anime(4, "Attack on Titan", genres,
+        animeDatabase.put("Attack on Titan", new Anime(4, "Attack on Titan",
                 "https://static.wikia.nocookie.net/shingekinokyojin/images/d/d8/Attack_on_Titan_Season_1.jpg/revision/latest?cb=20211005182832"));
-        animeDatabase.put("My Hero Academia", new Anime(5, "My Hero Academia", genres,
+        animeDatabase.put("My Hero Academia", new Anime(5, "My Hero Academia",
                 "https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/251524e3b5517b689317437d881eccf0.jpe"));
 
 
 
 
-        fakeaccount.addToInProgress(animeDatabase.get("One Piece"));
-//        fakeaccount.addToWatchlist(animeDatabase.get("Naruto"));
-//        fakeaccount.addToInProgress(animeDatabase.get("Dragon Ball"));
-//        fakeaccount.addToInProgress(animeDatabase.get("Attack on Titan"));
-        fakeaccount.addtoStatus("In Progress", animeDatabase.get("One Piece"));
-//        fakeaccount.addtoStatus("Watchlist", animeDatabase.get("Naruto"));
-//        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Dragon Ball"));
-//        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Attack on Titan"));
-//        fakeaccount.addtoStatus("Completed", animeDatabase.get("My Hero Academia"));
-//        fakeaccount.addToWatchHistory(animeDatabase.get("My Hero Academia"));
+        fakeaccount.addToWatchlist(animeDatabase.get("One Piece"));
+        fakeaccount.addToWatchlist(animeDatabase.get("Naruto"));
+        fakeaccount.addToInProgress(animeDatabase.get("Dragon Ball"));
+        fakeaccount.addToInProgress(animeDatabase.get("Attack on Titan"));
+        fakeaccount.addtoStatus("Watchlist", animeDatabase.get("One Piece"));
+        fakeaccount.addtoStatus("Watchlist", animeDatabase.get("Naruto"));
+        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Dragon Ball"));
+        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Attack on Titan"));
+        fakeaccount.addtoStatus("Completed", animeDatabase.get("My Hero Academia"));
+        fakeaccount.addToWatchHistory(animeDatabase.get("My Hero Academia"));
 
     }
 

@@ -140,6 +140,7 @@ public class Anime implements Media{
     @Override
     public int hashCode() {
         return Objects.hash(id, title, genres, releaseDate, imageURL, synopsis, episodes);
+    }
 
     public static AnimeBuilder builder() {
         return new AnimeBuilder();
