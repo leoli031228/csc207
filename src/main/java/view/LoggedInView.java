@@ -1,4 +1,3 @@
-/*
 package view;
 
 import data_access.FileUserDataAccessObject;
@@ -73,8 +72,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     }
 
-*
-     * React to a button click that results in evt.
+
+    // React to a button click that results in evt.
 
 
     public void actionPerformed(ActionEvent evt) {
@@ -103,4 +102,3 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         username.setText(state.getUsername());
     }
 }
-*/
