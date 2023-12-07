@@ -15,7 +15,7 @@ public class FilterController {
         FilterInputData filterInputData = new FilterInputData(
                 genreIDs);
 
-        // pass in the genre, invoking the interactor
+        // pass in the genre IDs
         filterUseCaseInteractor.execute(filterInputData);
     }
 }

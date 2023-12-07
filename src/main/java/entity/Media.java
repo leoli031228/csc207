@@ -3,13 +3,14 @@ package entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface Media {
     Integer getID();
 
     String getTitle();
 
-    List<String> getGenres();
+    Map<String,Integer> getGenres();
 
     LocalDateTime getReleaseDate();
 
@@ -26,7 +27,7 @@ public interface Media {
 
     void setSynopsis(String synopsis);
 
-    void setGenres(List<String> genres);
+    void setGenres(Map<String,Integer> genres);
 
     void setReleaseDate(LocalDateTime ldt);
 
