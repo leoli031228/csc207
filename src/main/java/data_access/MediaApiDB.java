@@ -24,7 +24,7 @@ public class MediaApiDB implements SearchDataAccessInterface {
     }
 
     //Helper Method
-    public HashMap<String, ArrayList<Object>> getCoverInfo(){}
+  //  public HashMap<String, ArrayList<Object>> getCoverInfo(){}
 
     @Override
     public HashMap<String, ArrayList<Object>> searchTitle(String title) {
