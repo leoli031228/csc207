@@ -7,24 +7,50 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RecSystemFriends implements RecSystem {
 
     @Override
     public List<Anime> getRecommendations(User user) {
         Set<Anime> recommendedAnime = new HashSet<>();
+        Set<Anime> userWatchedOrWatching = getUserAnimeList(user);
 
         for (User friend : user.getProfile().getFriends()) {
-            List<Media> friendsWatchHistory = friend.getProfile().getWatchHistory();
+            List<Media> combinedMediaList = new ArrayList<>();
+            combinedMediaList.addAll(friend.getProfile().getWatchHistory());
+            combinedMediaList.addAll(friend.getProfile().getWatchlist());
+            combinedMediaList.addAll(friend.getProfile().getInProgress());
 
-            for (Media media : friendsWatchHistory) {
-                if (media instanceof Anime) {
+            for (Media media : combinedMediaList) {
+                if (media instanceof Anime && !userWatchedOrWatching.contains(media)) {
                     recommendedAnime.add((Anime) media);
                 }
             }
         }
 
-        // Convert the set to a list and limit the number of recommendations
         return new ArrayList<>(recommendedAnime).subList(0, Math.min(recommendedAnime.size(), 5));
     }
+
+    private Set<Anime> getUserAnimeList(User user) {
+        Set<Anime> userAnimeList = new HashSet<>();
+
+        // Adding Anime from the user's watchHistory
+        user.getProfile().getWatchHistory().stream()
+                .filter(media -> media instanceof Anime)
+                .forEach(media -> userAnimeList.add((Anime) media));
+
+        // Adding Anime from the user's watchlist
+        user.getProfile().getWatchlist().stream()
+                .filter(media -> media instanceof Anime)
+                .forEach(media -> userAnimeList.add((Anime) media));
+
+        // Adding Anime from the user's inProgress list
+        user.getProfile().getInProgress().stream()
+                .filter(media -> media instanceof Anime)
+                .forEach(media -> userAnimeList.add((Anime) media));
+
+        return userAnimeList;
+    }
+
 }
