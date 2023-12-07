@@ -1,7 +1,16 @@
 package main.java.use_case.recommendation;
 
-public class RecSystemGenre implements RecSystem{
-    public void recommend(Integer userID) {
+import entity.User;
+import entity.Anime;
+import java.util.List;
 
+
+public class RecSystemGenre implements RecSystem{
+    public RecSystemGenre() {
+    }
+
+    @Override
+    public List<Anime> getRecommendations(User user) {
+        return null;
     }
 }

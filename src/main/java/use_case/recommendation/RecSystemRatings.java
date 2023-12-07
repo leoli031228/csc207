@@ -1,5 +1,15 @@
 package main.java.use_case.recommendation;
 
-public class RecSystemRatings {
+import entity.User;
+import entity.Anime;
+import java.util.List;
 
+public class RecSystemRatings implements RecSystem {
+    public RecSystemRatings() {
+    }
+
+    @Override
+    public List<Anime> getRecommendations(User user) {
+        return null;
+    }
 }
