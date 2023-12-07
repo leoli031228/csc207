@@ -31,24 +31,28 @@ public class MockAnimeSearchDataAccessObject implements SearchDataAccessInterfac
         genres8.put("Romance", 22);
         genres8.put("Drama", 8);
 
-        animeDatabase.put("One Piece", new Anime(1, "One Piece",genres1,
-                "https://upload.wikimedia.org/wikipedia/en/9/90/One_Piece%2C_Volume_61_Cover_%28Japanese%29.jpg"));
-        animeDatabase.put("Naruto", new Anime(2, "Naruto",genres2,
-                "https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg"));
-        animeDatabase.put("Dragon Ball", new Anime(3, "Dragon Ball",genres3,
-                "https://m.media-amazon.com/images/M/MV5BYzI0YjYxY2UtNzRjNS00NTZiLTgzMDItNGEzMjU5MmE0ZWJmXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"));
-        animeDatabase.put("Attack on Titan", new Anime(4, "Attack on Titan",genres4,
-                "https://static.wikia.nocookie.net/shingekinokyojin/images/d/d8/Attack_on_Titan_Season_1.jpg/revision/latest?cb=20211005182832" ));
-        animeDatabase.put("My Hero Academia", new Anime(5, "My Hero Academia",genres5,
-                "https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/251524e3b5517b689317437d881eccf0.jpe"));
-        animeDatabase.put("Jujutsu Kaisen", new Anime(6, "Jujutsu Kaisen",genres5,
-                "https://images.justwatch.com/poster/306336521/s332/season-2"));
-        animeDatabase.put("Jujutsu Kaisen 0", new Anime(7, "Jujutsu Kaisen 0",genres5,
-                "https://m.media-amazon.com/images/M/MV5BODM0NmVjMzUtOTJhNi00N2ZhLWFkYmMtYmZmNjRiY2M1YWY4XkEyXkFqcGdeQXVyOTgxOTA5MDg@._V1_.jpg"));
-        animeDatabase.put("Jujutsu Kaisen Official PV", new Anime(7, "Jujutsu Kaisen Official PV",genres5,
-                "https://m.media-amazon.com/images/M/MV5BMTMwMDM4N2EtOTJiYy00OTQ0LThlZDYtYWUwOWFlY2IxZGVjXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"));
-        animeDatabase.put("Fruits Basket 1st Season", new Anime(7, "Fruits Basket 1st Season",genres8,
-                "https://cdn.myanimelist.net/images/anime/4/75204.jpg"));
+        animeDatabase.put("One Piece", Anime.builder()
+                                .id(1).title("One Piece")
+                                .genres(genres1)
+                                .imageURL("https://upload.wikimedia.org/wikipedia/en/9/90/One_Piece%2C_Volume_61_Cover_%28Japanese%29.jpg")
+                                .build());
+        animeDatabase.put("Naruto", Anime.builder()
+                                    .id(2).title("Naruto").genres(genres2)
+                                    .imageURL("https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg").build());
+        animeDatabase.put("Dragon Ball", Anime.builder().id(3).title("Dragon Ball").genres(genres3)
+                .imageURL("https://m.media-amazon.com/images/M/MV5BYzI0YjYxY2UtNzRjNS00NTZiLTgzMDItNGEzMjU5MmE0ZWJmXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg").build());
+        animeDatabase.put("Attack on Titan", Anime.builder().id(4).title("Attack on Titan").genres(genres4)
+                .imageURL("https://static.wikia.nocookie.net/shingekinokyojin/images/d/d8/Attack_on_Titan_Season_1.jpg/revision/latest?cb=20211005182832").build());
+        animeDatabase.put("My Hero Academia", Anime.builder().id(5).title("My Hero Academia").genres(genres5)
+                .imageURL("https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/251524e3b5517b689317437d881eccf0.jpe").build());
+        animeDatabase.put("Jujutsu Kaisen", Anime.builder().id(6).title("Jujutsu Kaisen").genres(genres5)
+                .imageURL("https://images.justwatch.com/poster/306336521/s332/season-2").build());
+        animeDatabase.put("Jujutsu Kaisen 0", Anime.builder().id(7).title("Jujutsu Kaisen 0").genres(genres5)
+                .imageURL("https://m.media-amazon.com/images/M/MV5BODM0NmVjMzUtOTJhNi00N2ZhLWFkYmMtYmZmNjRiY2M1YWY4XkEyXkFqcGdeQXVyOTgxOTA5MDg@._V1_.jpg").build());
+        animeDatabase.put("Jujutsu Kaisen Official PV", Anime.builder().id(7).title("Jujutsu Kaisen Official PV").genres(genres5)
+                .imageURL("https://m.media-amazon.com/images/M/MV5BMTMwMDM4N2EtOTJiYy00OTQ0LThlZDYtYWUwOWFlY2IxZGVjXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg").build());
+        animeDatabase.put("Fruits Basket 1st Season", Anime.builder().id(7).title("Fruits Basket 1st Season").genres(genres8)
+                .imageURL("https://cdn.myanimelist.net/images/anime/4/75204.jpg").build());
 
 
     }

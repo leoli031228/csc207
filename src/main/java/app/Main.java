@@ -1,13 +1,18 @@
 package app;
 
+import data_access.FileProfileDataAccessObject;
 import data_access.FileUserDataAccessObject;
 
+import data_access.MediaApiDB;
+import interface_adapter.filter.FilterViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.search.SearchViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.ViewManagerModel;
 
 import interface_adapter.switch_view.SwitchViewController;
+import use_case.search.SearchDataAccessInterface;
 import view.*;
 
 import javax.swing.*;
@@ -41,6 +46,8 @@ public class Main {
         LoginViewModel loginViewModel = new LoginViewModel();
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
+        SearchViewModel searchViewModel = new SearchViewModel();
+        FilterViewModel filterViewModel = new FilterViewModel();
 
         FileUserDataAccessObject userDataAccessObject;
         try {
@@ -48,6 +55,17 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        FileProfileDataAccessObject profileDataAccessObject;
+        try {
+            profileDataAccessObject = new FileProfileDataAccessObject("./profiles.json");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // initialize API access object
+        MediaApiDB mediaDataAccessObject = new MediaApiDB();
+        MediaApiDB filterDataAccessObject = new MediaApiDB();;
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
@@ -58,6 +76,8 @@ public class Main {
         MainMenuView mainMenuView = new MainMenuView(new SwitchViewController(viewManagerModel));
         views.add(mainMenuView, mainMenuView.viewName);
 
+        SearchView searchView = SearchUseCaseFactory.create(viewManagerModel, searchViewModel, filterViewModel, mediaDataAccessObject, filterDataAccessObject);
+
        /* LoggedInView loggedInView = new LoggedInView(loggedInViewModel, views, cardLayout, userDataAccessObject);
         views.add(loggedInView, loggedInView.viewName);
 
@@ -65,7 +85,6 @@ public class Main {
         views.add(searchFriendView, searchFriendView.viewName);*/
 
         viewManagerModel.setActiveView(signupView.viewName);
-        //viewManagerModel.setActiveView(mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
