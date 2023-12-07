@@ -40,20 +40,24 @@ public class ProgressTrackerView extends JPanel implements ActionListener, Prope
         progressTrackerViewModel.addPropertyChangeListener(this);
 
         JLabel title_watchlist = new JLabel(ProgressTrackerViewModel.WATCHLIST_LABEL);
-        title_watchlist.setHorizontalAlignment(20);
+        title_watchlist.setBounds(100, 0, 10,5);
+        title_watchlist.setVerticalAlignment(SwingConstants.TOP);
 
         JLabel title_inprogress = new JLabel(ProgressTrackerViewModel.INPROGRESS_LABEL);
-        title_inprogress.setHorizontalAlignment(50);
+        title_inprogress.setBounds(200, 0, 10,5);
+        title_inprogress.setVerticalAlignment(SwingConstants.TOP);
 
         JLabel title_watchhistory = new JLabel(ProgressTrackerViewModel.WATCHHISTORY_LABEL);
-        title_watchhistory.setHorizontalAlignment(80);
+        title_watchhistory.setBounds(300, 0, 10,5);
+        title_watchhistory.setVerticalAlignment(SwingConstants.TOP);
 
         JLabel title_status = new JLabel(ProgressTrackerViewModel.STATUS_LABEL);
-        title_status.setHorizontalAlignment(110);
+        title_status.setBounds(400, 0, 10,5);
+        title_status.setVerticalAlignment(SwingConstants.TOP);
 
         JFrame frame = new JFrame("Progress Tracker");
 
-        JPanel buttons = new JPanel(new GridLayout(3, 4, 10, 10));
+        JPanel buttons = new JPanel(new GridLayout());
         ProgressTrackerState currentState = progressTrackerViewModel.getState();
 
         for (Media media : currentState.getWatchlist()) {
@@ -73,7 +77,7 @@ public class ProgressTrackerView extends JPanel implements ActionListener, Prope
        buttons.add(title_inprogress);
        buttons.add(title_watchhistory);
        buttons.add(title_status);
-       buttons.add(buttons);
+       frame.add(buttons);
        frame.getContentPane().add(buttons);
        frame.setSize(800, 800);
        frame.setLocationRelativeTo(null);
