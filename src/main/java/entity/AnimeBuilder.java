@@ -8,11 +8,11 @@ import java.util.Map;
 public class AnimeBuilder implements MediaBuilder{
     private Integer id;
     private String title;
-    private String imageURL;
-    private Map<String,Integer> genres;
-    private LocalDateTime releaseDate;
-    private String synopsis;
-    private ArrayList<String> episodes;
+    private String imageURL = null;
+    private Map<String,Integer> genres = null;
+    private LocalDateTime releaseDate = null;
+    private String synopsis = null;
+    private ArrayList<String> episodes = null;
 
     AnimeBuilder(){}
 
@@ -58,7 +58,7 @@ public class AnimeBuilder implements MediaBuilder{
 
     @Override
     public Anime buildSimple() {
-        return new Anime(id, title, genres, imageURL);
+        return new Anime(id, title, imageURL);
     }
 
     @Override
