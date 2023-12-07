@@ -84,8 +84,7 @@ public class Main {
         SearchFriendView searchFriendView = new SearchFriendView(userDataAccessObject, views, cardLayout, loggedInViewModel);
         views.add(searchFriendView, searchFriendView.viewName);*/
 
-        //viewManagerModel.setActiveView(signupView.viewName);
-        viewManagerModel.setActiveView(searchView.viewName);
+        viewManagerModel.setActiveView(signupView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();

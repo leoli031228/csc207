@@ -3,6 +3,7 @@ package view;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.switch_view.SwitchViewController;
+import view.SearchView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,6 +73,7 @@ public class MainMenuView extends JPanel implements ActionListener {
                         if (evt.getSource().equals(logout)) {
                             System.out.println("logout clicked");
                             switchViewController.execute("log out");
+
                         }
                     }
                 }
@@ -95,7 +97,9 @@ public class MainMenuView extends JPanel implements ActionListener {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(searchMedia)) {
                             System.out.println("searchMedia clicked");
-                            switchViewController.execute("search");
+                            //switchViewController.execute("search");
+
+
                         }
                     }
                 }

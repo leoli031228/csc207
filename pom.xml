@@ -14,7 +14,6 @@
 
 <!--    external libraries/modules our project relies on-->
     <dependencies>
-
         <dependency>
             <groupId>org.json</groupId> <!--identifies library's group/organization -->
             <artifactId>json</artifactId> <!--specifies unique identifier for library-->
