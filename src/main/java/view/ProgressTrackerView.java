@@ -82,16 +82,17 @@ public class ProgressTrackerView extends JPanel implements ActionListener, Prope
         ProgressTrackerState currentState = progressTrackerViewModel.getState();
 
         for (Media media : currentState.getWatchlist()) {
-            addtoInProgress = new JButton(ProgressTrackerViewModel.ADD_TO_PROG_BUTTON_LABEL);
-            addtoInProgress.addActionListener(new ButtonClickListener(media));
+            JButton addToInProgressButton = new JButton(ProgressTrackerViewModel.ADD_TO_PROG_BUTTON_LABEL);
+            addToInProgressButton.addActionListener(new ButtonClickListener(media));
             panel1.add(new JLabel(media.getTitle()));
-            panel1.add(addtoInProgress);
+            panel1.add(addToInProgressButton);
         }
+
         for (Media media : currentState.getinProgress()) {
-            addtoWatchHistory = new JButton(ProgressTrackerViewModel.ADD_TO_WATCHHISTORY_BUTTON_LABEL);
-            addtoWatchHistory.addActionListener(new ButtonClickListener(media));
+            JButton addToWatchHistoryButton = new JButton(ProgressTrackerViewModel.ADD_TO_WATCHHISTORY_BUTTON_LABEL);
+            addToWatchHistoryButton.addActionListener(new ButtonClickListener(media));
             panel2.add(new JLabel(media.getTitle()));
-            panel2.add(addtoWatchHistory);
+            panel2.add(addToWatchHistoryButton);
         }
         for (Media media : currentState.getwatchHistory()) {
             panel3.add(new JLabel(media.getTitle()));
@@ -126,18 +127,16 @@ public class ProgressTrackerView extends JPanel implements ActionListener, Prope
 
         @Override
         public void actionPerformed(ActionEvent evt) {
-            if (evt.getSource().equals(addtoInProgress)) {
-                ProgressTrackerState currentState = progressTrackerViewModel.getState();
+            if (evt.getSource() instanceof JButton) {
+                JButton sourceButton = (JButton) evt.getSource();
 
-                progressTrackerController.execute(currentState.getUser(),
-                        media,
-                        "Watchlist");
-            }
-            else if (evt.getSource().equals(addtoWatchHistory)) {
-                ProgressTrackerState currentState = progressTrackerViewModel.getState();
-                progressTrackerController.execute(currentState.getUser(),
-                        media,
-                        "In Progress");
+                if (sourceButton.getText().equals(ProgressTrackerViewModel.ADD_TO_PROG_BUTTON_LABEL)) {
+                    ProgressTrackerState currentState = progressTrackerViewModel.getState();
+                    progressTrackerController.execute(currentState.getUser(), media, "Watchlist");
+                } else if (sourceButton.getText().equals(ProgressTrackerViewModel.ADD_TO_WATCHHISTORY_BUTTON_LABEL)) {
+                    ProgressTrackerState currentState = progressTrackerViewModel.getState();
+                    progressTrackerController.execute(currentState.getUser(), media, "In Progress");
+                }
             }
         }
     }
