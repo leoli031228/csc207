@@ -3,6 +3,9 @@ package main.java.use_case.recommendation;
 import entity.Media;
 import entity.User;
 import entity.Anime;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -39,25 +42,27 @@ public class RecSystemRecent implements RecSystem {
 
     private List<Anime> parseJsonToAnime(String json, int limit) {
         List<Anime> animeList = new ArrayList<>();
-        JSONObject jsonObj = new JSONObject(json);
-        JSONArray dataArray = jsonObj.getJSONArray("data");
+        try {
+            JSONObject jsonObj = new JSONObject(json);
+            JSONArray dataArray = jsonObj.getJSONArray("data");
 
-        // Iterate through each item in the data array (up to the specified limit)
-        for (int i = 0; i < dataArray.length() && i < limit; i++) {
-            JSONObject dataItem = dataArray.getJSONObject(i);
-            JSONArray entryArray = dataItem.getJSONArray("entry");
+            for (int i = 0; i < dataArray.length() && i < limit; i++) {
+                JSONObject dataItem = dataArray.getJSONObject(i);
+                JSONArray entryArray = dataItem.getJSONArray("entry");
 
-            // Iterate through each entry in the entry array
-            for (int j = 0; j < entryArray.length() && animeList.size() < limit; j++) {
-                JSONObject entry = entryArray.getJSONObject(j);
-                Integer malId = entry.getInt("mal_id");
-                String titleName = entry.getString("title");
-                String imageUrl = entry.getJSONObject("images").getJSONObject("jpg").getString("image_url");
+                for (int j = 0; j < entryArray.length() && animeList.size() < limit; j++) {
+                    JSONObject entry = entryArray.getJSONObject(j);
+                    Integer malId = entry.getInt("mal_id");
+                    String titleName = entry.getString("title");
+                    String imageUrl = entry.getJSONObject("images").getJSONObject("jpg").getString("image_url");
 
-                // Create a new Anime object and add it to the list
-                Anime anime = new Anime(malId, titleName, imageUrl);
-                animeList.add(anime);
+                    Anime anime = new Anime(malId, titleName, imageUrl);
+                    animeList.add(anime);
+                }
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            // Handle JSON parsing errors
         }
 
         return animeList;
