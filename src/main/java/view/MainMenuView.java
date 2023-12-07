@@ -2,9 +2,10 @@ package view;
 
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.login.LoginViewModel;
 import interface_adapter.switch_view.SwitchViewController;
-import view.SearchView;
 
+import interface_adapter.login.LoginState;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +15,7 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class MainMenuView extends JPanel implements ActionListener {
+public class MainMenuView extends JPanel implements ActionListener/*, PropertyChangeListener*/{
     public final String viewName = "main menu";
 
     private final SwitchViewController switchViewController;
@@ -24,8 +25,12 @@ public class MainMenuView extends JPanel implements ActionListener {
     private final JButton searchFriend;
     private final JButton searchMedia;
 
-    public MainMenuView(SwitchViewController switchViewController) {
+    //private final LoginViewModel loginViewModel;
+
+    public MainMenuView(SwitchViewController switchViewController /*LoginViewModel loginViewModel*/) {
         this.switchViewController = switchViewController;
+        /*this.loginViewModel = loginViewModel;
+        this.loginViewModel.addPropertyChangeListener(this);*/
 
         JPanel buttons = new JPanel();
         JLabel title = new JLabel("Menu");
@@ -71,8 +76,9 @@ public class MainMenuView extends JPanel implements ActionListener {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(logout)) {
+                            //LoginState loginState = LoginState.getS();
                             System.out.println("logout clicked");
-                            switchViewController.execute("log out");
+                            switchViewController.execute("log in");
 
                         }
                     }
@@ -97,7 +103,7 @@ public class MainMenuView extends JPanel implements ActionListener {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(searchMedia)) {
                             System.out.println("searchMedia clicked");
-                            //switchViewController.execute("search");
+                            switchViewController.execute("search");
 
 
                         }
@@ -116,4 +122,10 @@ public class MainMenuView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
     }
+
+    /*@Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        LoginState state = (LoginState) evt.getNewValue();
+        setFields(state);
+    }*/
 }
