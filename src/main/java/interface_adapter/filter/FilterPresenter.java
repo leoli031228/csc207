@@ -19,7 +19,14 @@ public class FilterPresenter implements FilterOutputBoundary {
     @Override
     public void prepareResultsView(FilterOutputData results) {
         // update view to display resulting titles and their images
+        FilterState filterState = filterViewModel.getState();
+        filterState.setResults(results.getResults());
 
+        this.filterViewModel.setState(filterState);
+        filterViewModel.firePropertyChanged();
+
+        viewManagerModel.setActiveView(filterViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
 
     }
 

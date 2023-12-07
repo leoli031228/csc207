@@ -27,6 +27,9 @@ public class MockAnimeSearchDataAccessObject implements SearchDataAccessInterfac
         genres4.put("Action", 1);
         Map<String,Integer> genres5 = new HashMap<>();
         genres5.put("Action", 1);
+        Map<String,Integer> genres8 = new HashMap<>();
+        genres8.put("Romance", 22);
+        genres8.put("Drama", 8);
 
         animeDatabase.put("One Piece", new Anime(1, "One Piece",genres1,
                 "https://upload.wikimedia.org/wikipedia/en/9/90/One_Piece%2C_Volume_61_Cover_%28Japanese%29.jpg"));
@@ -44,6 +47,9 @@ public class MockAnimeSearchDataAccessObject implements SearchDataAccessInterfac
                 "https://m.media-amazon.com/images/M/MV5BODM0NmVjMzUtOTJhNi00N2ZhLWFkYmMtYmZmNjRiY2M1YWY4XkEyXkFqcGdeQXVyOTgxOTA5MDg@._V1_.jpg"));
         animeDatabase.put("Jujutsu Kaisen Official PV", new Anime(7, "Jujutsu Kaisen Official PV",genres5,
                 "https://m.media-amazon.com/images/M/MV5BMTMwMDM4N2EtOTJiYy00OTQ0LThlZDYtYWUwOWFlY2IxZGVjXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"));
+        animeDatabase.put("Fruits Basket 1st Season", new Anime(7, "Fruits Basket 1st Season",genres8,
+                "https://cdn.myanimelist.net/images/anime/4/75204.jpg"));
+
 
     }
 
