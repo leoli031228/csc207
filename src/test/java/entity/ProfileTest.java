@@ -37,9 +37,10 @@ class ProfileTest {
         //System.out.println(profile.friendsString());
     }
 
- /*   @Test
+   @Test
     void mediaListToIDs() {
-    }*/
+    }
+
 
     @Test
     void mediaListToString() {
