@@ -46,6 +46,7 @@ public class Profile {
         return statuses;
     }
 
+
     // Setters
     public void setFriends(List<User> friends) {
         this.friends = friends;
@@ -106,9 +107,8 @@ public class Profile {
     }
 
     public void removeFromsStatus(String status, Media media) {
-        if (this.statuses.containsKey(status)) {
-            this.statuses.get(status).remove(media);
-        }
+        this.statuses.get(status).remove(media);
+
     }
 
     // Lists to Strings

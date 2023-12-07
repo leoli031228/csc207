@@ -9,6 +9,7 @@ import use_case.progessTracker.ProgressTrackerDataAccessInterface;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProgressTrackerDataAccessObject implements ProgressTrackerDataAccessInterface {
@@ -36,10 +37,36 @@ public class ProgressTrackerDataAccessObject implements ProgressTrackerDataAcces
         animeDatabase.put("My Hero Academia", new Anime(5, "My Hero Academia",
                 "https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/251524e3b5517b689317437d881eccf0.jpe"));
 
+        fakeaccount.addToWatchlist(animeDatabase.get("One Piece"));
+        fakeaccount.addToWatchlist(animeDatabase.get("Naruto"));
+        fakeaccount.addToInProgress(animeDatabase.get("Dragon Ball"));
+        fakeaccount.addToInProgress(animeDatabase.get("Attack on Titan"));
+        fakeaccount.addtoStatus("Watchlist", animeDatabase.get("One Piece"));
+        fakeaccount.addtoStatus("Watchlist", animeDatabase.get("Naruto"));
+        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Dragon Ball"));
+        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Attack on Titan"));
+        fakeaccount.addtoStatus("Completed", animeDatabase.get("My Hero Academia"));
+        fakeaccount.addToWatchHistory(animeDatabase.get("My Hero Academia"));
+
+    }
+
+    public User getUser() {
+        return fakeuser;
+    }
+    public List<Media> getWatchlist() {
+        return fakeaccount.getWatchlist();
+    }
+    public List<Media> getinProgress() {
+        return fakeaccount.getInProgress();
+    }
+    public List<Media> getwatchHistory() {
+        return fakeaccount.getWatchHistory();
+    }
+    public Map<String, List<Media>> getStatuses() {
+        return fakeaccount.getStatuses();
     }
 
     @Override
-
     public boolean existsinWatchHistory(Profile profile, Media title) {
         return profile.getWatchHistory().contains(title);
     }
@@ -62,9 +89,9 @@ public class ProgressTrackerDataAccessObject implements ProgressTrackerDataAcces
             profile.removeFromInProgress(title);
         }
         // Since the media is in the in progress list, remove from the list of in progress media
-        profile.removeFromsStatus("In Progress", title);
         profile.addtoStatus("Completed", title); // update status to finished
         // add finished media to user's watch history
+        profile.removeFromsStatus("In Progress", title);
         profile.addToWatchHistory(title);
     }
     public boolean existsinInProgress(Profile profile, Media title) {
