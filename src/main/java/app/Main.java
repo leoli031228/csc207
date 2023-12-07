@@ -77,6 +77,7 @@ public class Main {
         views.add(mainMenuView, mainMenuView.viewName);
 
         SearchView searchView = SearchUseCaseFactory.create(viewManagerModel, searchViewModel, filterViewModel, mediaDataAccessObject, filterDataAccessObject);
+        //views.add(searchView, searchView.viewName);
 
        /* LoggedInView loggedInView = new LoggedInView(loggedInViewModel, views, cardLayout, userDataAccessObject);
         views.add(loggedInView, loggedInView.viewName);

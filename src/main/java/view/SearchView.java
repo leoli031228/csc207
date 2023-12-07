@@ -237,9 +237,6 @@ public class SearchView implements ActionListener, PropertyChangeListener {
         }
     }
 
-    public JFrame getFrame() {
-        return frame;
-    }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
