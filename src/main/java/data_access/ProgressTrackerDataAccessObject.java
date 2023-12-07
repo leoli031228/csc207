@@ -24,29 +24,32 @@ public class ProgressTrackerDataAccessObject implements ProgressTrackerDataAcces
     public ProgressTrackerDataAccessObject() {
         // Initialize the database with some sample data
 
-
+        Map<String, Integer> genres = new HashMap<>();
         animeDatabase = new HashMap<>();
-        animeDatabase.put("One Piece", new Anime(1, "One Piece",
+        animeDatabase.put("One Piece", new Anime(1, "One Piece", genres,
                 "https://upload.wikimedia.org/wikipedia/en/9/90/One_Piece%2C_Volume_61_Cover_%28Japanese%29.jpg"));
-        animeDatabase.put("Naruto", new Anime(2, "Naruto",
+        animeDatabase.put("Naruto", new Anime(2, "Naruto", genres,
                 "https://upload.wikimedia.org/wikipedia/en/9/94/NarutoCoverTankobon1.jpg"));
-        animeDatabase.put("Dragon Ball", new Anime(3, "Dragon Ball",
+        animeDatabase.put("Dragon Ball", new Anime(3, "Dragon Ball", genres,
                 "https://m.media-amazon.com/images/M/MV5BYzI0YjYxY2UtNzRjNS00NTZiLTgzMDItNGEzMjU5MmE0ZWJmXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg"));
-        animeDatabase.put("Attack on Titan", new Anime(4, "Attack on Titan",
+        animeDatabase.put("Attack on Titan", new Anime(4, "Attack on Titan", genres,
                 "https://static.wikia.nocookie.net/shingekinokyojin/images/d/d8/Attack_on_Titan_Season_1.jpg/revision/latest?cb=20211005182832"));
-        animeDatabase.put("My Hero Academia", new Anime(5, "My Hero Academia",
+        animeDatabase.put("My Hero Academia", new Anime(5, "My Hero Academia", genres,
                 "https://www.crunchyroll.com/imgsrv/display/thumbnail/480x720/catalog/crunchyroll/251524e3b5517b689317437d881eccf0.jpe"));
 
-        fakeaccount.addToWatchlist(animeDatabase.get("One Piece"));
-        fakeaccount.addToWatchlist(animeDatabase.get("Naruto"));
-        fakeaccount.addToInProgress(animeDatabase.get("Dragon Ball"));
-        fakeaccount.addToInProgress(animeDatabase.get("Attack on Titan"));
-        fakeaccount.addtoStatus("Watchlist", animeDatabase.get("One Piece"));
-        fakeaccount.addtoStatus("Watchlist", animeDatabase.get("Naruto"));
-        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Dragon Ball"));
-        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Attack on Titan"));
-        fakeaccount.addtoStatus("Completed", animeDatabase.get("My Hero Academia"));
-        fakeaccount.addToWatchHistory(animeDatabase.get("My Hero Academia"));
+
+
+
+        fakeaccount.addToInProgress(animeDatabase.get("One Piece"));
+//        fakeaccount.addToWatchlist(animeDatabase.get("Naruto"));
+//        fakeaccount.addToInProgress(animeDatabase.get("Dragon Ball"));
+//        fakeaccount.addToInProgress(animeDatabase.get("Attack on Titan"));
+        fakeaccount.addtoStatus("In Progress", animeDatabase.get("One Piece"));
+//        fakeaccount.addtoStatus("Watchlist", animeDatabase.get("Naruto"));
+//        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Dragon Ball"));
+//        fakeaccount.addtoStatus("In Progress", animeDatabase.get("Attack on Titan"));
+//        fakeaccount.addtoStatus("Completed", animeDatabase.get("My Hero Academia"));
+//        fakeaccount.addToWatchHistory(animeDatabase.get("My Hero Academia"));
 
     }
 
@@ -91,7 +94,9 @@ public class ProgressTrackerDataAccessObject implements ProgressTrackerDataAcces
         // Since the media is in the in progress list, remove from the list of in progress media
         profile.addtoStatus("Completed", title); // update status to finished
         // add finished media to user's watch history
-        profile.removeFromsStatus("In Progress", title);
+        if(profile.getStatuses().get("In Progress").contains(title)) {
+            profile.removeFromsStatus("In Progress", title);
+        }
         profile.addToWatchHistory(title);
     }
     public boolean existsinInProgress(Profile profile, Media title) {

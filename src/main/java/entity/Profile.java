@@ -107,8 +107,12 @@ public class Profile {
     }
 
     public void removeFromsStatus(String status, Media media) {
-        this.statuses.get(status).remove(media);
+        List<Media> mediaList = this.statuses.get(status);
 
+        // Check if the list is not null before invoking contains
+        if (mediaList != null && mediaList.contains(media)) {
+            mediaList.remove(media);
+        }
     }
 
     // Lists to Strings
