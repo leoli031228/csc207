@@ -45,6 +45,11 @@ public class ProgressTrackerView extends JPanel implements ActionListener, Prope
         panel3.removeAll();
         panel4.removeAll();
 
+        panel1.setBackground(new Color(140, 216, 250));
+        panel2.setBackground(new Color(119, 212, 252));
+        panel3.setBackground(new Color(119, 212, 252));
+        panel4.setBackground(new Color(140, 216, 250));
+
         JLabel title_watchlist = new JLabel(ProgressTrackerViewModel.WATCHLIST_LABEL);
         title_watchlist.setFont(new Font("Calibri", Font.BOLD, 20));
         title_watchlist.setVerticalAlignment(SwingConstants.TOP);
