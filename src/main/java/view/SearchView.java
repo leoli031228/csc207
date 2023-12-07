@@ -196,18 +196,28 @@ public class SearchView implements ActionListener, PropertyChangeListener {
             // and the image url
             Map<String, ArrayList<Object>> results = state.getResults();
             List<String> animeList = new ArrayList<>(results.keySet());
-
             // clear current grid panel
             gridPanel.removeAll();
-            for (String anime : animeList) {
-                String imageURL = (String) results.get(anime).get(0);
-                gridPanel.add(createAnimeCard(anime, imageURL));
+
+            if (state.getNoResultsError() != null) {
+                gridPanel.removeAll();
+                gridPanel.revalidate();
+                gridPanel.repaint();
+                // No results found
+                JOptionPane.showMessageDialog(null, state.getNoResultsError());
+                state.setNoResultsError(null);
+            } else {
+
+                for (String anime : animeList) {
+                    String imageURL = (String) results.get(anime).get(0);
+                    gridPanel.add(createAnimeCard(anime, imageURL));
+                }
+
+                // update scroll pane with new grid panel
+                scrollPane.setViewportView(gridPanel);
             }
-            // repaint the grid panel with new search results
             gridPanel.revalidate();
             gridPanel.repaint();
-            // update scroll pane with new grid panel
-            scrollPane.setViewportView(gridPanel);
         } else if ("filter state".equals(evt.getPropertyName())) {
 
             FilterState filterState = (FilterState) evt.getNewValue();

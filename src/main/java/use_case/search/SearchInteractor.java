@@ -24,9 +24,9 @@ public class SearchInteractor implements SearchInputBoundary {
             SearchOutputData searchOutputData = new SearchOutputData(
                     resultsDataAccessObject.searchTitle(searchInputData.getTitle()) );
             resultsPresenter.prepareResultsView(searchOutputData);
+        } else {
+            resultsPresenter.prepareFailView("No results found.");
         }
-        resultsPresenter.prepareFailView("No results found.");
-
 
     }
 }
