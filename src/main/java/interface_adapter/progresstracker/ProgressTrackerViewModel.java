@@ -12,6 +12,9 @@ public class ProgressTrackerViewModel extends ViewModel {
     public static final String INPROGRESS_LABEL = "In-Progress";
     public static final String WATCHHISTORY_LABEL = "Watch History";
 
+    public static final String ADD_TO_PROG_BUTTON_LABEL = "Add to In-Progress";
+    public static final String ADD_TO_WATCHHISTORY_BUTTON_LABEL = "Add to Watch-History";
+
     public static final String STATUS_LABEL = "Statuses";
 
     private ProgressTrackerState state = new ProgressTrackerState();

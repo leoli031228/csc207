@@ -2,8 +2,8 @@ package entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Anime implements Media{
     private Integer id;
@@ -121,8 +121,28 @@ public class Anime implements Media{
                 ", imageURL='" + imageURL + '\'' +
                 '}';
     }
+//TODO: check
+    @Override
+    public boolean equals(Media media) {
+        if (this == media) return true;
+        if (media == null || getClass() != media.getClass()) return false;
+
+        Anime other = (Anime) media;
+        return Objects.equals(id, other.id) &&
+                Objects.equals(title, other.title) &&
+                Objects.equals(genres, other.genres) &&
+                Objects.equals(releaseDate, other.releaseDate) &&
+                Objects.equals(imageURL, other.imageURL) &&
+                Objects.equals(synopsis, other.synopsis) &&
+                Objects.equals(episodes, other.episodes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, genres, releaseDate, imageURL, synopsis, episodes);
 
     public static AnimeBuilder builder() {
         return new AnimeBuilder();
+
     }
 }

@@ -1,6 +1,7 @@
 package interface_adapter.progresstracker;
 
 import entity.Media;
+import entity.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,10 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ProgressTrackerState {
+    private User user;
     private List<Media> watchlist = new ArrayList<Media>();
     private List<Media> inProgress = new ArrayList<Media>();
     private List<Media> watchHistory = new ArrayList<Media>();
 
+    private String current_status;
     private Map<String, List<Media>> statuses = new HashMap<>();
 
     private String error = null;
@@ -25,6 +28,9 @@ public class ProgressTrackerState {
     public ProgressTrackerState(){
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
     public void setWatchlist(List<Media> watchlist) {
         this.watchlist = watchlist;
     }
@@ -45,6 +51,14 @@ public class ProgressTrackerState {
         this.error = error;
     }
 
+    public void setCurrent_status(String current_status) {
+        this.current_status = current_status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     public List<Media> getWatchlist() {
         return watchlist;
     }
@@ -60,5 +74,8 @@ public class ProgressTrackerState {
 
     public String getError() {
         return error;
+    }
+    public String getCurrent_status(){
+        return current_status;
     }
 }

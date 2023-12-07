@@ -36,4 +36,5 @@ public interface Media {
 
     String toSimpleString();
 
+    boolean equals(Media media);
 }
