@@ -1,3 +1,4 @@
+/*
 package view;
 
 import entity.User;
@@ -61,3 +62,4 @@ public class UserDetailView extends JPanel {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 }
+*/

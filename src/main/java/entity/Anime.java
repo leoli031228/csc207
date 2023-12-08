@@ -2,18 +2,19 @@ package entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class Anime implements Media{
     private Integer id;
     private String title;
-    private List<String> genres;
+    private Map<String,Integer> genres;
     private LocalDateTime releaseDate;
     private String imageURL;
     private String synopsis;
     private ArrayList<String> episodes;
 
-    Anime(Integer id, String title, List<String> genres, LocalDateTime releaseDate, String imageURL, String synopsis,
+    Anime(Integer id, String title, Map<String,Integer> genres, LocalDateTime releaseDate, String imageURL, String synopsis,
           ArrayList<String> episodes) {
         this.id = id;
         this.title = title;
@@ -42,7 +43,7 @@ public class Anime implements Media{
     }
 
     @Override
-    public List<String> getGenres() {
+    public Map<String,Integer> getGenres() {
         return genres;
     }
 
@@ -75,7 +76,7 @@ public class Anime implements Media{
     }
 
     @Override
-    public void setGenres(List<String> genres) {
+    public void setGenres(Map<String,Integer> genres) {
         this.genres = genres;
     }
 
@@ -120,12 +121,28 @@ public class Anime implements Media{
                 ", imageURL='" + imageURL + '\'' +
                 '}';
     }
+//TODO: check
+    @Override
+    public boolean equals(Media media) {
+        if (this == media) return true;
+        if (media == null || getClass() != media.getClass()) return false;
 
-    // Builder
-    public static AnimeBuilder builder() {
-        return new AnimeBuilder();
+        Anime other = (Anime) media;
+        return Objects.equals(id, other.id) &&
+                Objects.equals(title, other.title) &&
+                Objects.equals(genres, other.genres) &&
+                Objects.equals(releaseDate, other.releaseDate) &&
+                Objects.equals(imageURL, other.imageURL) &&
+                Objects.equals(synopsis, other.synopsis) &&
+                Objects.equals(episodes, other.episodes);
     }
 
-    // EXAMPLE:
-    // Anime.builder().id(1).title("Naruto").imageURL("url.").buildSimple();
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, genres, releaseDate, imageURL, synopsis, episodes);
+
+    public static AnimeBuilder builder() {
+        return new AnimeBuilder();
+
+    }
 }

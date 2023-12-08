@@ -32,12 +32,13 @@ public class SearchPresenter implements SearchOutputBoundary {
 
         viewManagerModel.setActiveView(searchViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-
-
     }
 
     @Override
     public void prepareFailView(String noResults) {
+        SearchState searchState = searchViewModel.getState();
+        searchState.setNoResultsError(noResults);
+        searchViewModel.firePropertyChanged();
         // If no results are found, show message "No results found"
 
     }

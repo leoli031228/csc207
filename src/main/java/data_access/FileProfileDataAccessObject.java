@@ -1,6 +1,7 @@
-/*
 package data_access;
 
+import entity.Anime;
+import entity.Media;
 import entity.User;
 import entity.Profile;
 
@@ -22,9 +23,7 @@ import org.json.JSONObject;
 import org.json.JSONArray;
 
 
-public class FileProfileDataAccessObject */
-/*implements*//*
-{
+public class FileProfileDataAccessObject /*implements*/ {
     private final File jsonFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, Profile> profiles = new HashMap<>();
@@ -41,86 +40,107 @@ public class FileProfileDataAccessObject */
             try{
                 String jsonContent = new String(Files.readAllBytes(Paths.get(filePath)));
 
-                // Parse the JSON array
-                JSONArray jsonArray = new JSONArray(jsonContent);
+                //the whole file is a JSONObject
+                JSONObject profileList = new JSONObject(jsonContent);
+                //Parsing the File to get the array of profiles
+                JSONArray jsonProfileArray = new JSONArray(profileList.getJSONArray("profiles"));
 
-                ArrayList<JSONObject> jsonMedias = new ArrayList<>();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonMedia = jsonArray.getJSONObject(i);
-                    jsonMedias.add(jsonMedia);
+                // Iterate over each JSON object in the array
+                for (int i = 0; i < jsonProfileArray.length(); i++) {
+
+                    //get the profile object
+                    JSONObject jsonProfile = jsonProfileArray.getJSONObject(i);
+                    // get the key of the profile (their username)
+                    String profileName = jsonProfile.keys().next();
+                    //initialize the profile
+                    Profile profile = new Profile(profileName);
+
+                    //parse the profile to add info to profile.
+                    JSONArray friendsArray = jsonProfile.getJSONArray("friends");
+                    ArrayList<User> friends = new ArrayList<>();
+                    for (int n=0; n < friendsArray.length(); n++){
+                        JSONObject jsonFriend = new JSONObject(friendsArray.getJSONObject(n));
+                        User friend = new User(jsonFriend.getString("username"),
+                                                jsonFriend.getString("email")); // create friend users
+                        friends.add(friend); // add User friend to list
+                    }
+                    profile.setFriends(friends); // adding list of friends
+
+                    JSONArray watchlistArray = jsonProfile.getJSONArray("watchlist");
+                    JSONArray inProgressArray = jsonProfile.getJSONArray("inProgress");
+                    JSONArray watchHistoryArray = jsonProfile.getJSONArray("watchHistory");
+                    //using helper method to create Media list for each type and add to profile
+                    profile.setWatchlist(toMediaList(watchlistArray));
+                    profile.setInProgress(toMediaList(inProgressArray));
+                    profile.setWatchHistory(toMediaList(watchHistoryArray));
+
+
+
+
+                    // add profile to the mapping of username to profile.
+                    profiles.put(profileName, profile);
                 }
 
-                // TODO: create profile from file...
-                Profile profile = new Profile(username);
-                // set lists in profile
-                profiles.put(username, profile);
+
 
             }catch(IOException e){
                 throw new FileNotFoundException("File reading error");
             }
-
-            */
-/*try (BufferedReader reader = new BufferedReader(new FileReader(csvFile))) {
-                String header = reader.readLine();
-
-                // For later: clean this up by creating a new Exception subclass and handling it in the UI.
-                assert header.equals("username,friends,watchlist,in_progress,watch_history");
-
-                String row;
-                while ((row = reader.readLine()) != null) {
-                    String[] col = row.split(",");
-                    String username = String.valueOf(col[headers.get("username")]);
-                    String friends = String.valueOf(col[headers.get("friends")]);
-                    String watchlist = String.valueOf(col[headers.get("watchlist")]);
-                    String inProgress = String.valueOf(col[headers.get("in_progress")]);
-                    String watchHistory = String.valueOf(col[headers.get("watch_history")]);
-
-                    // TODO: create profile from file...
-                    Profile profile = new Profile(username);
-                    // set lists in profile
-
-
-
-                    profiles.put(username, profile);
-                }
-            }*//*
-
         }
     }
 
+    // helper to create a media list from the JSONArray
+    private ArrayList<Media> toMediaList(JSONArray jsonArray){
+        ArrayList<Media> mediaList = new ArrayList<>();
+        for (int n=0; n < jsonArray.length(); n++){
+            JSONObject media = new JSONObject(jsonArray.getJSONObject(n));
+            mediaList.add(Anime.builder()
+                    .id(media.getInt("id"))
+                    .title(media.getString("title"))
+                    .imageURL(media.getString("imageURL"))
+                    .buildSimple()); // add built media to list
+        }
+        return mediaList;
+    }
+
+
     // save the user into the hashMap
-    */
-/*@Override
+/*
+@Override
     public void save(Profile profile) {
         profiles.put(profile.getUsername(), profile);
         this.save();
-    }*//*
+    }
 
 
-   */
-/* @Override
+ @Override
     public Profile getUsername(String username) {
         return profile.get(username);
-    }*//*
+    }
 
 
-   */
-/* @Override
+ @Override
     public ArrayList<String> getProfiles() {
         return new ArrayList<>(profile.keySet());
-    }*//*
+    }
+*/
+
+
+
 
 
     private void save() {
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(jsonFile));
-            writer.write("[");
+
+            writer.write("{\"profiles\":[");
             for (Profile profile : profiles.values()) {
+                writer.write("{\"" + profile.getUsername() + "\":");
                 writer.write(profile.toJSON());
-                writer.write(",");
+                writer.write("},");
             }
-            writer.write("]");
+            writer.write("]}");
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -128,4 +148,3 @@ public class FileProfileDataAccessObject */
     }
 
 }
-*/

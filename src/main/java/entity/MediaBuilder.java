@@ -2,6 +2,7 @@ package entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public interface MediaBuilder {
 
@@ -11,7 +12,7 @@ public interface MediaBuilder {
 
     MediaBuilder imageURL(String url);
 
-    MediaBuilder genres(List<String> genres);
+    MediaBuilder genres(Map<String,Integer> genres);
 
     MediaBuilder releaseDate(LocalDateTime releaseDate);
 

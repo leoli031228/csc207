@@ -1,14 +1,12 @@
 package entity;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Manga implements Media{
     private Integer id;
     private String title;
-    private List<String> genres;
+    private Map<String,Integer> genres;
     private LocalDateTime releaseDate;
     private String imageURL;
     private String synopsis;
@@ -25,7 +23,7 @@ public class Manga implements Media{
     }
 
     @Override
-    public List<String> getGenres() {
+    public Map<String,Integer> getGenres() {
         return genres;
     }
 
@@ -55,7 +53,7 @@ public class Manga implements Media{
         this.title = title;
     }
 
-    public void setGenres(List<String> genres) {
+    public void setGenres(Map<String,Integer> genres) {
         this.genres = genres;
     }
 
@@ -96,5 +94,26 @@ public class Manga implements Media{
                 ", imageURL='" + imageURL + '\'' +
                 '}';
 
+    }
+
+    @Override
+    public boolean equals(Media media) {
+        if (this == media) return true;
+        if (media == null || getClass() != media.getClass()) return false;
+
+        Manga other = (Manga) media;
+
+        return Objects.equals(id, other.id) &&
+                Objects.equals(title, other.title) &&
+                Objects.equals(genres, other.genres) &&
+                Objects.equals(releaseDate, other.releaseDate) &&
+                Objects.equals(imageURL, other.imageURL) &&
+                Objects.equals(synopsis, other.synopsis) &&
+                Objects.equals(chapters, other.chapters);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, genres, releaseDate, imageURL, synopsis, chapters);
     }
 }
