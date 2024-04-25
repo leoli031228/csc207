@@ -1,4 +1,4 @@
-# CSC207 Project 
+# CSC207 Project Anime Cataloging App
 ***
 By: Kelsie Fung, Leo Li, Alyssa Lu, Glenn Li, David Lee
 ***
